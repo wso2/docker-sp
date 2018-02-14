@@ -22,18 +22,19 @@ MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
 # set user configurations
 ARG USER=wso2carbon
+ARG USER_ID=802
 ARG USER_GROUP=wso2
+ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
 # set dependant files directory
 ARG FILES=./files
 # set jdk configurations
-ARG JDK_ARCHIVE=jdk-8u*-linux-x64.tar.gz
-ARG JAVA_HOME_PARENT=/opt
-ARG JAVA_HOME=${JAVA_HOME_PARENT}/java
+ARG JDK=jdk1.8.0*
+ARG JAVA_HOME=${USER_HOME}/java
 # set wso2 product configurations
 ARG WSO2_SERVER=wso2sp
 ARG WSO2_SERVER_VERSION=4.0.0
-ARG WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}*.zip
+ARG WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}
 ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}
 
 # install required packages
@@ -47,21 +48,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # create a user group and a user
-RUN groupadd --system ${USER_GROUP} && \
-    useradd --system --create-home --home-dir ${USER_HOME} --no-log-init -g ${USER_GROUP} ${USER}
+RUN groupadd --system -g ${USER_GROUP_ID} ${USER_GROUP} && \
+    useradd --system --create-home --home-dir ${USER_HOME} --no-log-init -g ${USER_GROUP_ID} -u ${USER_ID} ${USER}
 
 # copy the jdk and wso2 product distribution zip files to user's home directory
-COPY ${FILES}/${JDK_ARCHIVE} ${JAVA_HOME_PARENT}/
-COPY ${FILES}/${WSO2_SERVER_PACK} ${USER_HOME}/
-
-# install the jdk, wso2 server, remove distributions and set folder permissions
-RUN mkdir -p ${JAVA_HOME} && \
-    tar -xf ${JAVA_HOME_PARENT}/${JDK_ARCHIVE} -C ${JAVA_HOME} --strip-components=1 && \
-    unzip -q ${USER_HOME}/${WSO2_SERVER_PACK} -d ${USER_HOME}/ && \
-    rm ${JAVA_HOME_PARENT}/${JDK_ARCHIVE} && \
-    rm ${USER_HOME}/${WSO2_SERVER_PACK} && \
-    chown -R ${USER}:${USER_GROUP} ${USER_HOME} && \
-    chmod -R g=u ${USER_HOME}
+COPY --chown=wso2carbon:wso2 ${FILES}/${JDK} ${USER_HOME}/java
+COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_PACK}/ ${USER_HOME}/${WSO2_SERVER_PACK}/
 
 # set the user and work directory
 USER ${USER}
