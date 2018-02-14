@@ -15,11 +15,11 @@ git clone https://github.com/wso2/docker-sp.git
 
 >The local copy of the `dockerfiles` directory will be referred to as `DOCKERFILE_HOME` from this point onwards.
 
-##### 2. Add JDK and WSO2 Stream Processor distributions to `<DOCKERFILE_HOME>/base/files`
+##### 2. Copy the extracted JDK and WSO2 Stream Processor distributions to `<DOCKERFILE_HOME>/base/files`
 - Download [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 
-and copy that to `<DOCKERFILE_HOME>/base/files`.
+and extract it to `<DOCKERFILE_HOME>/base/files`.
 - Download [WSO2 Stream Processor 4.0.0 distribution](https://github.com/wso2/product-sp/releases) 
-and copy that to `<DOCKERFILE_HOME>/base/files`. <br>
+and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
 
 ##### 3. Build the base Docker image.
 - For base, navigate to `<DOCKERFILE_HOME>/base` directory. <br>
