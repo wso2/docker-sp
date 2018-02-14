@@ -1,8 +1,10 @@
 FROM ubuntu:16.04
 
 # set user configurations
-ARG USER=kafka
-ARG USER_GROUP=kafka
+ARG USER=wso2carbon
+ARG USER_ID=802
+ARG USER_GROUP=wso2
+ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
 ARG FILES=./files
 
@@ -19,12 +21,13 @@ RUN apt-get update && \
     netcat && \
     rm -rf /var/lib/apt/lists/*
 
-RUN groupadd --system ${USER_GROUP} && \
-    useradd --system --create-home --home-dir ${USER_HOME} --no-log-init -g ${USER_GROUP} ${USER}
+RUN groupadd --system -g ${USER_GROUP_ID} ${USER_GROUP} && \
+    useradd --system --create-home --home-dir ${USER_HOME} --no-log-init -g ${USER_GROUP_ID} -u ${USER_ID} ${USER}
 
-COPY --chown=kafka:kafka docker-entrypoint.sh ${USER_HOME}
-COPY --chown=kafka:kafka ${FILES}/${JDK} ${USER_HOME}/java
-COPY --chown=kafka:kafka ${FILES}/${DISTRO_NAME} ${USER_HOME}/${DISTRO_NAME}
+# copy the required files
+COPY --chown=wso2carbon:wso2 docker-entrypoint.sh ${USER_HOME}
+COPY --chown=wso2carbon:wso2 ${FILES}/${JDK} ${USER_HOME}/java
+COPY --chown=wso2carbon:wso2 ${FILES}/${DISTRO_NAME} ${USER_HOME}/${DISTRO_NAME}
 
 # set environment variables
 ENV JAVA_HOME=${JAVA_HOME} \
@@ -34,8 +37,3 @@ USER ${USER}
 WORKDIR ${USER_HOME}
 
 ENTRYPOINT ./docker-entrypoint.sh
-
-
-
-
-
