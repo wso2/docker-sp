@@ -15,7 +15,7 @@ services:
       timeout: 60s
       retries: 5
   kafka:
-    image: kafka:2.11-0.10.0.0
+    image: dockerhub.wso2.com/kafka:2.11-0.10.0.0
     container_name: wso2sp-kafka
     ports:
       - "2181:2181"
@@ -26,7 +26,7 @@ services:
       timeout: 60s
       retries: 5
   manager:
-    image: wso2sp-manager:4.0.0
+    image: dockerhub.wso2.com/wso2sp-manager:4.0.0
     container_name: wso2sp-manager
     ports:
       - "9543:9543"
@@ -50,7 +50,7 @@ services:
     links:
       - kafka
   worker:
-    image: wso2sp-worker:4.0.0
+    image: dockerhub.wso2.com/wso2sp-worker:4.0.0
     container_name: wso2sp-worker
     ports:
       - "9090:9090"
@@ -75,7 +75,7 @@ services:
     links:
       - manager
   dashboard:
-    image: wso2sp-dashboard:4.0.0
+    image: dockerhub.wso2.com/wso2sp-dashboard:4.0.0
     container_name: wso2sp-dashboard
     ports:
       - "9643:9643"
