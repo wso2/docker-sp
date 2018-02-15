@@ -1,5 +1,18 @@
 version: '2.3'
 services:
+  mysql:
+    image: mysql:5.7.19
+    ports:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql/scripts:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-pwso2carbon"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
   kafka:
     image: kafka
     ports:
@@ -54,7 +67,23 @@ services:
       - ./worker/lib/scala_parser_combinators_2.11_1.0.4_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/scala_parser_combinators_2.11_1.0.4_1.0.0.jar
       - ./worker/lib/zkclient_0.8_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/zkclient_0.8_1.0.0.jar
       - ./worker/lib/zookeeper_3.4.6_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/zookeeper_3.4.6_1.0.0.jar
+      - ./worker/lib/mysql-connector-java-5.1.45-bin.jar:/home/wso2carbon/wso2sp-4.0.0/lib/mysql-connector-java-5.1.45-bin.jar
     links:
       - manager
+  dashboard:
+    image: wso2sp-dashboard:4.0.0
+    ports:
+      - "9643:9643"
+    healthcheck:
+      test: ["CMD", "nc", "-z","localhost", "9643"]
+      interval: 10s
+      timeout: 120s
+      retries: 5
+    depends_on:
+      worker:
+        condition: service_healthy
+    volumes:
+      - ./dashboard/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/dashboard/deployment.yaml
+      - ./dashboard/lib/mysql-connector-java-5.1.45-bin.jar:/home/wso2carbon/wso2sp-4.0.0/lib/mysql-connector-java-5.1.45-bin.jar
 
 
