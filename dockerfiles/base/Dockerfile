@@ -44,6 +44,7 @@ RUN apt-get update && \
     curl \
     iproute2 \
     telnet \
+    netcat \
     unzip && \
     rm -rf /var/lib/apt/lists/*
 

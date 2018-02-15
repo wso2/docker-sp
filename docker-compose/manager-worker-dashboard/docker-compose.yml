@@ -1,0 +1,92 @@
+version: '2.3'
+services:
+  mysql:
+    image: mysql:5.7.19
+    container_name: wso2sp-mysql
+    ports:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql/scripts:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-pwso2carbon"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+  kafka:
+    image: kafka:2.11-0.10.0.0
+    container_name: wso2sp-kafka
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "9092"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+  manager:
+    image: wso2sp-manager:4.0.0
+    container_name: wso2sp-manager
+    ports:
+      - "9543:9543"
+    healthcheck:
+      test: ["CMD", "nc", "-z","localhost", "9190"]
+      interval: 10s
+      timeout: 120s
+      retries: 5
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./manager/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/manager/deployment.yaml
+      - ./lib/kafka_2.11_0.10.0.0_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/kafka_2.11_0.10.0.0_1.0.0.jar
+      - ./lib/kafka_clients_0.10.0.0_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/kafka_clients_0.10.0.0_1.0.0.jar
+      - ./lib/metrics_core_2.2.0_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/metrics_core_2.2.0_1.0.0.jar
+      - ./lib/scala_library_2.11.8_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/scala_library_2.11.8_1.0.0.jar
+      - ./lib/scala_parser_combinators_2.11_1.0.4_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/scala_parser_combinators_2.11_1.0.4_1.0.0.jar
+      - ./lib/zkclient_0.8_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/zkclient_0.8_1.0.0.jar
+      - ./lib/zookeeper_3.4.6_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/zookeeper_3.4.6_1.0.0.jar
+    links:
+      - kafka
+  worker:
+    image: wso2sp-worker:4.0.0
+    container_name: wso2sp-worker
+    ports:
+      - "9090:9090"
+    healthcheck:
+      test: ["CMD", "nc", "-z","localhost", "9090"]
+      interval: 10s
+      timeout: 120s
+      retries: 5
+    depends_on:
+      manager:
+        condition: service_healthy
+    volumes:
+      - ./worker/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/worker/deployment.yaml
+      - ./lib/kafka_2.11_0.10.0.0_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/kafka_2.11_0.10.0.0_1.0.0.jar
+      - ./lib/kafka_clients_0.10.0.0_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/kafka_clients_0.10.0.0_1.0.0.jar
+      - ./lib/metrics_core_2.2.0_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/metrics_core_2.2.0_1.0.0.jar
+      - ./lib/scala_library_2.11.8_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/scala_library_2.11.8_1.0.0.jar
+      - ./lib/scala_parser_combinators_2.11_1.0.4_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/scala_parser_combinators_2.11_1.0.4_1.0.0.jar
+      - ./lib/zkclient_0.8_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/zkclient_0.8_1.0.0.jar
+      - ./lib/zookeeper_3.4.6_1.0.0.jar:/home/wso2carbon/wso2sp-4.0.0/lib/zookeeper_3.4.6_1.0.0.jar
+      - ./lib/mysql-connector-java-5.1.45-bin.jar:/home/wso2carbon/wso2sp-4.0.0/lib/mysql-connector-java-5.1.45-bin.jar
+    links:
+      - manager
+  dashboard:
+    image: wso2sp-dashboard:4.0.0
+    container_name: wso2sp-dashboard
+    ports:
+      - "9643:9643"
+    healthcheck:
+      test: ["CMD", "nc", "-z","localhost", "9643"]
+      interval: 10s
+      timeout: 120s
+      retries: 5
+    depends_on:
+      worker:
+        condition: service_healthy
+    volumes:
+      - ./dashboard/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/dashboard/deployment.yaml
+      - ./lib/mysql-connector-java-5.1.45-bin.jar:/home/wso2carbon/wso2sp-4.0.0/lib/mysql-connector-java-5.1.45-bin.jar
