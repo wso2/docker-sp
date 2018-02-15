@@ -8,9 +8,9 @@ Runs a pre configured Stream Processor setup with Kafka broker and Stream Proces
 
 ## How to deploy
 
-##### 1. Pull the Kafka, Stream Processor manager, worker and dashboard images or build them:
+  1. Pull the Kafka, Stream Processor manager, worker and dashboard images or build them:
 
-   * [Stream Processor](../../dockerfiles/README.md)
+     - [Stream Processor](../../dockerfiles/README.md)
 
   2. Pull MySQL Docker image:
      ```
@@ -19,7 +19,7 @@ Runs a pre configured Stream Processor setup with Kafka broker and Stream Proces
 
   3. Download the latest Stream Processor Docker resources release zip file from the [releases](https://github.com/wso2/docker-sp/releases) page or clone this repository to your local machine and switch to the latest tag.
   
-  > Note that the local copy of `docker-sp` repository will be referred to as `[docker-sp]` from this point onwards.
+     > Note that the local copy of `docker-sp` repository will be referred to as `[docker-sp]` from this point onwards.
 
   4. Switch to the docker-compose/manager-worker-dashboard folder:
      ```
