@@ -23,12 +23,36 @@ and extract it to `<DOCKERFILE_HOME>/base/files`.
 - Download [WSO2 Stream Processor 4.0.0 distribution](https://github.com/wso2/product-sp/releases) 
 and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
 
-##### 3. Build the base Docker image.
+##### 3. Download [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) v5.1.45 and copy the jar to `<DOCKERFILE_HOME>/base/files`
+   ```
+   cp path/to/mysql/connector/jar <DOCKERFILE_HOME>/base/files
+   ```
+
+##### 4. Convert and copy the Kafka client jars from the `kafka_2.11-0.10.0.0/libs/` to `<DOCKERFILE_HOME>/base/files` directory
+
+The list of required client jars are;
+
+- kafka_2.11-0.10.2.1.jar
+- kafka-clients-0.10.2.1.jar
+- metrics-core-2.2.0.jar
+- scala-library-2.11.8.jar
+- scala-parser-combinators_2.11-1.0.4.jar
+- zkclient-0.10.jar
+- zookeeper-3.4.9.jar
+
+> Use the `jartobundle.sh` script found it `wso2sp-4.0.0/bin` as shown below; note that you will have to run this command for each jar mentioned above
+
+  ```
+  ./wso2sp-4.0.0/bin/jartobundle.sh path/to/kafka/client/jar <DOCKERFILE_HOME>/base/files
+  ```
+
+
+##### 4. Build the base Docker image.
 - For base, navigate to `<DOCKERFILE_HOME>/base` directory. <br>
   Execute `docker build` command as shown below.
     + `docker build -t wso2sp-base:4.0.0 .`
         
-##### 4. Build Docker images specific to each profile.
+##### 5. Build Docker images specific to each profile.
 - For Dashboard, navigate to `<DOCKERFILE_HOME>/dashboard` directory. <br>
   Execute `docker build` command as shown below. 
     + `docker build -t wso2sp-dashboard:4.0.0 .`
@@ -42,7 +66,7 @@ and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
   Execute `docker build` command as shown below. 
     + `docker build -t wso2sp-worker:4.0.0 .`
     
-##### 5. Running Docker images specific to each profile.
+##### 6. Running Docker images specific to each profile.
 - For Dashboard,
     + `docker run -it -p 9643:9643 wso2sp-dashboard:4.0.0`
 - For Editor,
@@ -52,7 +76,7 @@ and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
 - For Worker,
     + `docker run -it wso2sp-worker:4.0.0`   
 
-##### 6. Accessing management console per each profile.
+##### 7. Accessing management console per each profile.
 - For Dashboard,
     + Business Rules:<br>
     `https://<DOCKER_HOST>:9643/business-rules`
