@@ -36,6 +36,9 @@ services:
       retries: 5
     volumes:
        - ./worker/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/worker/deployment.yaml
+    depends_on:
+          mysql:
+            condition: service_healthy
     links:
       - mysql
   dashboard:
