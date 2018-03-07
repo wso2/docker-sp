@@ -14,34 +14,18 @@ services:
       interval: 30s
       timeout: 60s
       retries: 5
-  kafka:
-    image: dockerhub.wso2.com/kafka:2.11-0.10.0.0
-    container_name: wso2sp-kafka
+  editor:
+    image: dockerhub.wso2.com/wso2sp-editor:4.0.0
+    container_name: wso2sp-editor
     ports:
-      - "2181:2181"
-      - "9092:9092"
+      - "9390:9390"
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "9092"]
-      interval: 30s
-      timeout: 60s
-      retries: 5
-  manager:
-    image: dockerhub.wso2.com/wso2sp-manager:4.0.0
-    container_name: wso2sp-manager
-    ports:
-      - "9543:9543"
-    healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9190"]
+      test: ["CMD", "nc", "-z","localhost", "9090"]
       interval: 10s
       timeout: 120s
       retries: 5
-    depends_on:
-      kafka:
-        condition: service_healthy
-    volumes:
-      - ./manager/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/manager/deployment.yaml
-    links:
-      - kafka
+   volumes:
+      - ./editor/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/editor/deployment.yaml
   worker:
     image: dockerhub.wso2.com/wso2sp-worker:4.0.0
     container_name: wso2sp-worker
@@ -52,14 +36,9 @@ services:
       interval: 10s
       timeout: 120s
       retries: 5
-    depends_on:
-      manager:
-        condition: service_healthy
-    volumes:
+   volumes:
       - ./worker/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/worker/deployment.yaml
-    links:
-      - manager
-  dashboard:
+ dashboard:
     image: dockerhub.wso2.com/wso2sp-dashboard:4.0.0
     container_name: wso2sp-dashboard
     ports:
