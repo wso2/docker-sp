@@ -24,8 +24,8 @@ services:
       interval: 10s
       timeout: 120s
       retries: 5
-    volumes:
-      - ./editor/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/editor/deployment.yaml
+#    volumes:
+#      - ./editor/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.0.0/conf/editor/deployment.yaml
   worker:
     image: dockerhub.wso2.com/wso2sp-worker:4.0.0
     container_name: wso2sp-worker
