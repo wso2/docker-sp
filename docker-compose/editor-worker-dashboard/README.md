@@ -4,7 +4,7 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
 
 ## Prerequisites
 
- * [Docker](https://www.docker.com/get-docker) and [Docker Compose](https://docs.docker.com/compose/install/#install-compose) are required for running this Docker Compose file.
+ * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Docker](https://www.docker.com/get-docker) and [Docker Compose](https://docs.docker.com/compose/install/#install-compose) are required for running this Docker Compose template.
  * In order to run the Docker Compose configuration, you will need an active subscription from WSO2 since the 
    Docker images hosted at docker.wso2.com contains the latest updates and fixes to WSO2 Stream Processor. You can 
    sign up for a Free Trial Subscription [here](https://wso2.com/free-trial-subscription).
