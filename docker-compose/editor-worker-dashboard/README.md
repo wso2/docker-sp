@@ -13,9 +13,9 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
      sign up for a Free Trial Subscription [here](https://wso2.com/free-trial-subscription).
      
      > If you wish to run the Docker Compose configuration using Docker images built locally, build the Stream Processor editor, worker and 
-     dashboard images using [SP Dockerfiles](../../dockerfiles/README.md) and remove the `docker.wso2.com/` prefix from the `image` name In the `docker-compose.yml` 
- 
-     > For example, change the line `image: docker.wso2.com/wso2sp-manager:4.0.0` to `image: wso2sp-manager:4.0.0`
+     dashboard images using [SP Dockerfiles](../../dockerfiles/README.md) and remove the `docker.wso2.com/` prefix 
+     from the `image` name In the `docker-compose.yml`. For example, change the line `image: docker.wso2
+     .com/wso2sp-manager:4.0.0` to `image: wso2sp-manager:4.0.0`
 
   2. Pull MySQL Docker image:
      ```
