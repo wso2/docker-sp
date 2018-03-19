@@ -8,11 +8,14 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
 
 ## How to deploy
 
-  1. Build the Stream Processor editor, worker and dashboard images using [SP Dockerfiles](../../dockerfiles/README.md)
-
-     > In the `docker-compose.yml`, remove the `dockerhub.wso2.com/` prefix from the `image` name
-
-     > For example, change the line `image: dockerhub.wso2.com/wso2sp-manager:4.0.0` to `image: wso2sp-manager:4.0.0`
+  1. In order to run the Docker Compose configuration, you will need an active subscription from WSO2 since the 
+     Docker images hosted at docker.wso2.com contains the latest updates and fixes to WSO2 Stream Processor. You can 
+     sign up for a Free Trial Subscription [here](https://wso2.com/free-trial-subscription).
+     
+     > If you wish to run the Docker Compose configuration using Docker images built locally, build the Stream Processor editor, worker and 
+     dashboard images using [SP Dockerfiles](../../dockerfiles/README.md) and remove the `docker.wso2.com/` prefix from the `image` name In the `docker-compose.yml` 
+ 
+     > For example, change the line `image: docker.wso2.com/wso2sp-manager:4.0.0` to `image: wso2sp-manager:4.0.0`
 
   2. Pull MySQL Docker image:
      ```
