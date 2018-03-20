@@ -20,17 +20,17 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
      ```
      > Note that the local copy of `docker-sp` repository will be referred to as `[docker-sp]` from this point onwards.
 
-  2. Switch to the docker-compose/editor-worker-dashboard folder:
+  2. Switch to the `docker-compose/editor-worker-dashboard` folder.
      ```
      cd [docker-sp]/docker-compose/editor-worker-dashboard
      ```
 
-  3. Execute the following Docker Compose command to start the deployment:
+  3. Execute the following Docker Compose command to start the deployment.
      ```
      docker-compose up
      ```
 
-  4. Access management console via a web browser :
+  4. Access management console via a web browser.
      ```
      For Status dashboard - https://localhost:9390/monitoring
      For Editor - https://localhost:9743/editor
