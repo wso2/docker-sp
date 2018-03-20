@@ -18,12 +18,17 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
      ```
       git clone https://github.com/wso2/docker-sp
      ```
-     > Note that the local copy of `docker-sp` repository will be referred to as `[docker-sp]` from this point onwards.
+     > If you are to try out an already released zip of this repo, please ignore this 1st step.
 
   2. Switch to the `docker-compose/editor-worker-dashboard` folder.
      ```
      cd [docker-sp]/docker-compose/editor-worker-dashboard
      ```
+     > If you are to try out an already released zip of this repo, please ignore this 2nd step also. 
+      Instead, extract the zip file and directly browse to `docker-sp-<released-version-here>docker-compose/editor-worker-dashboard` folder. 
+     
+     > If you want to try out an already released tag, after executing 2nd step, checkout the relevant tag, 
+      i.e. for example: git checkout tags/v4.0.0.2 and continue below steps.
 
   3. Execute the following Docker Compose command to start the deployment.
      ```
