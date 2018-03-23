@@ -15,17 +15,17 @@ services:
       timeout: 60s
       retries: 5
   editor:
-    image: docker.wso2.com/wso2sp-editor:4.0.0
+    image: wso2sp-editor:4.0.0
     container_name: wso2sp-editor
     ports:
-      - "9390:9390"
+      - "9743:9743"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9090"]
+      test: ["CMD", "nc", "-z","localhost", "9743"]
       interval: 10s
       timeout: 120s
       retries: 5
   worker:
-    image: docker.wso2.com/wso2sp-worker:4.0.0
+    image: wso2sp-worker:4.0.0
     container_name: wso2sp-worker
     ports:
       - "9090:9090"
@@ -42,7 +42,7 @@ services:
     links:
       - mysql
   dashboard:
-    image: docker.wso2.com/wso2sp-dashboard:4.0.0
+    image: wso2sp-dashboard:4.0.0
     container_name: wso2sp-dashboard
     ports:
       - "9643:9643"
