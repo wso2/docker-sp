@@ -18,9 +18,9 @@ services:
     image: docker.wso2.com/wso2sp-editor:4.0.0
     container_name: wso2sp-editor
     ports:
-      - "9390:9390"
+      - "9743:9743"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9090"]
+      test: ["CMD", "nc", "-z","localhost", "9743"]
       interval: 10s
       timeout: 120s
       retries: 5
