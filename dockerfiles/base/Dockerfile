@@ -51,6 +51,16 @@ RUN groupadd --system -g ${USER_GROUP_ID} ${USER_GROUP} && \
 COPY --chown=wso2carbon:wso2 ${FILES}/${JDK} ${USER_HOME}/java
 COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_PACK}/ ${USER_HOME}/${WSO2_SERVER_PACK}/
 
+# copy the jdk and wso2 product distribution zip files to user's home directory
+COPY --chown=wso2carbon:wso2 ${FILES}/kafka_2.11_0.10.0.0_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+COPY --chown=wso2carbon:wso2 ${FILES}/kafka_clients_0.10.0.0_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+COPY --chown=wso2carbon:wso2 ${FILES}/metrics_core_2.2.0_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+COPY --chown=wso2carbon:wso2 ${FILES}/scala_library_2.11.8_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+COPY --chown=wso2carbon:wso2 ${FILES}/scala_parser_combinators_2.11_1.0.4_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+COPY --chown=wso2carbon:wso2 ${FILES}/zkclient_0.8_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+COPY --chown=wso2carbon:wso2 ${FILES}/zookeeper_3.4.6_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+COPY --chown=wso2carbon:wso2 ${FILES}/mysql-connector-java-5.1.45-bin.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/
+
 # set the user and work directory
 USER ${USER}
 WORKDIR ${USER_HOME}
