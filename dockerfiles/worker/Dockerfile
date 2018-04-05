@@ -17,7 +17,7 @@
 # ------------------------------------------------------------------------
 
 # set to latest Ubuntu LTS
-FROM wso2sp-base:4.0.0
+FROM wso2sp-base:4.1.0
 MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
 # expose ports
