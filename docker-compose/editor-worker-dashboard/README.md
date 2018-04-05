@@ -28,7 +28,7 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
       Instead, extract the zip file and directly browse to `docker-sp-<released-version-here>docker-compose/editor-worker-dashboard` folder. 
      
      > If you want to try out an already released tag, after executing 2nd step, checkout the relevant tag, 
-      i.e. for example: git checkout tags/v4.1.0.2 and continue below steps.
+      i.e. for example: git checkout tags/v4.1.0.1 and continue below steps.
 
   3. Execute the following Docker Compose command to start the deployment.
      ```
