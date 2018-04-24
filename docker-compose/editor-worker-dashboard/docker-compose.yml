@@ -10,7 +10,7 @@ services:
     volumes:
       - ./mysql/scripts:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-pwso2carbon"]
+      test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-proot"]
       interval: 30s
       timeout: 60s
       retries: 5
@@ -35,7 +35,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.1.0/conf/worker/deployment.yaml
+       - ./worker:/home/wso2carbon/volumes/conf/worker
     depends_on:
           mysql:
             condition: service_healthy
@@ -55,4 +55,4 @@ services:
       worker:
         condition: service_healthy
     volumes:
-      - ./dashboard/conf/deployment.yaml:/home/wso2carbon/wso2sp-4.1.0/conf/dashboard/deployment.yaml
+      - ./dashboard:/home/wso2carbon/volumes/conf/dashboard
