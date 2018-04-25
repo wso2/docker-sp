@@ -20,7 +20,10 @@
 FROM wso2sp-base:4.1.0
 MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
+# copy entrypoint bash script to user home
+COPY --chown=wso2carbon:wso2 init.sh ${WORKING_DIRECTORY}/
+
 # expose ports
 EXPOSE 9714 9643 9614 7713 7613
 
-ENTRYPOINT ${WSO2_SERVER_HOME}/bin/dashboard.sh
+ENTRYPOINT ["/home/wso2carbon/init.sh"]
