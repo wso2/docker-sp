@@ -22,6 +22,7 @@ group=wso2
 
 # file path variables
 volumes=${WORKING_DIRECTORY}/volumes
+k8s_volumes=${WORKING_DIRECTORY}/kubernetes-volumes
 
 # check if the WSO2 non-root user home exists
 test ! -d ${WORKING_DIRECTORY} && echo "WSO2 Docker non-root user home does not exist" && exit 1
@@ -35,6 +36,10 @@ test ! -d ${WSO2_SERVER_HOME} && echo "WSO2 Docker product home does not exist" 
 # if any file changes have been mounted, copy the WSO2 configuration files recursively
 test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
+# check if a ConfigMap volume containing WSO2 worker configuration files has been mounted
+if test -d ${k8s_volumes}/${wso2_server_profile}/conf; then
+    cp -rL ${k8s_volumes}/${wso2_server_profile}/conf/* ${WSO2_SERVER_HOME}/conf/worker
+fi
 
 # start the WSO2 Carbon server profile
 sh ${WSO2_SERVER_HOME}/bin/worker.sh
