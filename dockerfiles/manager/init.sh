@@ -22,6 +22,7 @@ group=wso2
 
 # file path variables
 volumes=${WORKING_DIRECTORY}/volumes
+k8s_volumes=${WORKING_DIRECTORY}/kubernetes-volumes
 
 # check if the WSO2 non-root user home exists
 test ! -d ${WORKING_DIRECTORY} && echo "WSO2 Docker non-root user home does not exist" && exit 1
