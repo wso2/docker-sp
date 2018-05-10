@@ -35,6 +35,10 @@ test ! -d ${WSO2_SERVER_HOME} && echo "WSO2 Docker product home does not exist" 
 # if any file changes have been mounted, copy the WSO2 configuration files recursively
 test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
+# check if a ConfigMap volume containing WSO2 manager configuration files has been mounted
+if test -d ${k8s_volumes}/${wso2_server_profile}/conf; then
+    cp -rL ${k8s_volumes}/${wso2_server_profile}/conf/* ${WSO2_SERVER_HOME}/conf/manager
+fi
 
 # start the WSO2 Carbon server profile
 sh ${WSO2_SERVER_HOME}/bin/manager.sh
