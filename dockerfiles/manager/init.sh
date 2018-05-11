@@ -16,6 +16,9 @@
 # ------------------------------------------------------------------------
 set -e
 
+# product profile variable
+wso2_server_profile=manager
+
 # custom WSO2 non-root user and group variables
 user=wso2carbon
 group=wso2
