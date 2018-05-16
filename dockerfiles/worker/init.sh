@@ -17,7 +17,7 @@
 set -e
 
 # product profile variable
-wso2_server_profile=worker
+WSO2_SERVER_PROFILE=worker
 
 # custom WSO2 non-root user and group variables
 user=wso2carbon
@@ -41,7 +41,7 @@ test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
 # check if a ConfigMap volume containing WSO2 worker configuration files has been mounted
 if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
-    cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/worker
+    cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
 fi
 
 server_conf=${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
