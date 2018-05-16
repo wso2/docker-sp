@@ -47,7 +47,7 @@ fi
 server_conf=${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
 
 # update node ip
-export local_docker_ip=$(ip route get 1 | awk '{print $NF;exit}')
+local_docker_ip=$(ip route get 1 | awk '{print $NF;exit}')
 deployment_yaml_location=${server_conf}/deployment.yaml
 if [[ ! -z ${local_docker_ip} ]]; then
    sed -i "s#wso2-sp#wso2-sp${local_docker_ip}#" "${deployment_yaml_location}"
