@@ -16,12 +16,16 @@
 # ------------------------------------------------------------------------
 set -e
 
+# product profile variable
+WSO2_SERVER_PROFILE=worker
+
 # custom WSO2 non-root user and group variables
 user=wso2carbon
 group=wso2
 
 # file path variables
 volumes=${WORKING_DIRECTORY}/volumes
+k8s_volumes=${WORKING_DIRECTORY}/kubernetes-volumes
 
 # check if the WSO2 non-root user home exists
 test ! -d ${WORKING_DIRECTORY} && echo "WSO2 Docker non-root user home does not exist" && exit 1
@@ -35,6 +39,22 @@ test ! -d ${WSO2_SERVER_HOME} && echo "WSO2 Docker product home does not exist" 
 # if any file changes have been mounted, copy the WSO2 configuration files recursively
 test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
+# check if a ConfigMap volume containing WSO2 worker configuration files has been mounted
+if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
+    cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
+fi
+
+server_conf=${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
+
+# update node ip
+local_docker_ip=$(ip route get 1 | awk '{print $NF;exit}')
+deployment_yaml_location=${server_conf}/deployment.yaml
+if [[ ! -z ${local_docker_ip} ]]; then
+   sed -i "s#wso2-sp#wso2-sp${local_docker_ip}#" "${deployment_yaml_location}"
+   sed -i "s#NODE_IP#${local_docker_ip}#" "${deployment_yaml_location}"
+
+   echo "Successfully updated node with ${local_docker_ip}"
+fi
 
 # start the WSO2 Carbon server profile
 sh ${WSO2_SERVER_HOME}/bin/worker.sh
