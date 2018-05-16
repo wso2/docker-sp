@@ -41,8 +41,10 @@ test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
 # check if a ConfigMap volume containing WSO2 manager configuration files has been mounted
 if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
-    cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/manager
+    cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
 fi
+
+server_conf=${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
 
 # update node ip
 export local_docker_ip=$(ip route get 1 | awk '{print $NF;exit}')

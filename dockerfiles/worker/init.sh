@@ -44,6 +44,8 @@ if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
     cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/worker
 fi
 
+server_conf=${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
+
 # update node ip
 export local_docker_ip=$(ip route get 1 | awk '{print $NF;exit}')
 deployment_yaml_location=${server_conf}/deployment.yaml
