@@ -17,7 +17,7 @@
 set -e
 
 # product profile variable
-wso2_server_profile=manager
+WSO2_SERVER_PROFILE=manager
 
 # custom WSO2 non-root user and group variables
 user=wso2carbon
@@ -40,8 +40,21 @@ test ! -d ${WSO2_SERVER_HOME} && echo "WSO2 Docker product home does not exist" 
 test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
 # check if a ConfigMap volume containing WSO2 manager configuration files has been mounted
-if test -d ${k8s_volumes}/${wso2_server_profile}/conf; then
-    cp -rL ${k8s_volumes}/${wso2_server_profile}/conf/* ${WSO2_SERVER_HOME}/conf/manager
+if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
+    cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/manager
+fi
+
+# update node ip
+export local_docker_ip=$(ip route get 1 | awk '{print $NF;exit}')
+deployment_yaml_location=${server_conf}/deployment.yaml
+if [[ ! -z ${local_docker_ip} ]]; then
+   sed -i "s#wso2-sp#wso2-sp${local_docker_ip}#" "${deployment_yaml_location}"
+   sed -i "s#NODE_IP#${local_docker_ip}#" "${deployment_yaml_location}"
+   if [[ $? == 0 ]]; then
+      echo "Successfully updated node with ${local_docker_ip}"
+   else
+      echo "Error occurred while updating node with ${local_docker_ip}"
+   fi
 fi
 
 # start the WSO2 Carbon server profile
