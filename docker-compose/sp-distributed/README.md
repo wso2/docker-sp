@@ -34,4 +34,16 @@
      ```
      docker-compose up
      ```
+  4. Siddhi applications should be deployed to the manager cluster using following method.
+  
+  Sending a "POST" request to http://<host>:<port>/siddhi-apps, with the Siddhi App attached as a file in the request as shown in the example below. 
+  Refer [Stream Processor REST API Guide](https://docs.wso2.com/display/SP410/Stream+Processor+REST+API+Guide) for more information on using WSO2 Strean Processor APIs.
+  
+  Manager nodes are deployed under,
+       ```
+       Manager 1 - https://localhost:9190/
+       Manager 2 - https://localhost:9191/
+       ```
+ > Refer [Stream Processor Fully Distributed Deployment](https://docs.wso2.com/display/SP410/Fully+Distributed+Deployment)   
+     
 
