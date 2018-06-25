@@ -6,11 +6,10 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
 
  * Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Docker](https://www.docker.com/get-docker) and [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
    in order to run the steps provided in following Quick start guide. <br><br>
-  * In order to run this Docker Compose setup, you will need an active [Free Trial Subscription](https://wso2.com/free-trial-subscription) 
-   from WSO2 since the referring Docker images hosted at docker.wso2.com contains the latest updates and fixes for WSO2 Stream Processor. You can sign up for a Free Trial Subscription [here](https://wso2.com/free-trial-subscription). <br><br>
+  * In order to run this Docker Compose setup, you will need an active subscription from WSO2 since the referring Docker images hosted at docker.wso2.com contains the latest updates and fixes for WSO2 Stream Processor. You can sign up for a Free Trial Subscription [here](https://wso2.com/free-trial-subscription). <br><br>
  * If you wish to run the Docker Compose configuration using Docker images built locally, build the Stream Processor editor, worker and 
    dashboard images using [SP Dockerfiles](../../dockerfiles/README.md) and remove the `docker.wso2.com/` prefix 
-   from the `image` name In the `docker-compose.yml`. For example, change the line `image: docker.wso2.com/wso2sp-manager:4.1.0` <br> to `image: wso2sp-manager:4.1.0`. <br><br>
+   from the `image` name In the `docker-compose.yml`. For example, change the line `image: docker.wso2.com/wso2sp-manager:4.2.0` <br> to `image: wso2sp-manager:4.2.0`. <br><br>
 
 ## How to deploy
 
@@ -28,7 +27,7 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
       Instead, extract the zip file and directly browse to `docker-sp-<released-version-here>docker-compose/editor-worker-dashboard` folder. 
      
      > If you want to try out an already released tag, after executing 2nd step, checkout the relevant tag, 
-      i.e. for example: git checkout tags/v4.1.0.1 and continue below steps.
+      i.e. for example: git checkout tags/v4.2.0.1 and continue below steps.
 
   3. Execute the following Docker Compose command to start the deployment.
      ```
