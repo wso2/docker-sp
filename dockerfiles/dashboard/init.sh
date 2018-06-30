@@ -37,4 +37,4 @@ test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
 
 # start the WSO2 Carbon server profile
-sh ${WSO2_SERVER_HOME}/bin/dashboard.sh
+sh ${WSO2_SERVER_HOME}/bin/dashboard.sh $*
