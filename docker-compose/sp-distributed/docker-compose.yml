@@ -51,12 +51,12 @@ services:
       kafka:
         condition: service_healthy
   manager1:
-    image: docker.wso2.com/wso2sp-manager:4.1.0
+    image: docker.wso2.com/wso2sp-manager:4.2.0
     container_name: wso2sp-manager-1
     ports:
-      - "9190:9190"
+      - "9543:9543"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9190"]
+      test: ["CMD", "nc", "-z","localhost", "9543"]
       interval: 10s
       timeout: 120s
       retries: 5
@@ -71,12 +71,12 @@ services:
     links:
       - mysql
   manager2:
-    image: docker.wso2.com/wso2sp-manager:4.1.0
+    image: docker.wso2.com/wso2sp-manager:4.2.0
     container_name: wso2sp-manager-2
     ports:
-      - "9191:9190"
+      - "9544:9543"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9191"]
+      test: ["CMD", "nc", "-z","localhost", "9543"]
       interval: 10s
       timeout: 120s
       retries: 5
@@ -91,12 +91,12 @@ services:
     links:
       - manager1
   worker1:
-    image: docker.wso2.com/wso2sp-worker:4.1.0
+    image: docker.wso2.com/wso2sp-worker:4.2.0
     container_name: wso2sp-worker-1
     ports:
-      - "9001:9090"
+      - "9001:9443"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9090"]
+      test: ["CMD", "nc", "-z","localhost", "9001"]
       interval: 10s
       timeout: 120s
       retries: 5
@@ -112,10 +112,10 @@ services:
     links:
       - manager1
   worker2:
-    image: docker.wso2.com/wso2sp-worker:4.1.0
+    image: docker.wso2.com/wso2sp-worker:4.2.0
     container_name: wso2sp-worker-2
     ports:
-      - "9002:9090"
+      - "9002:9443"
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9002"]
       interval: 10s
@@ -133,10 +133,10 @@ services:
     links:
       - manager1
   worker3:
-    image: docker.wso2.com/wso2sp-worker:4.1.0
+    image: docker.wso2.com/wso2sp-worker:4.2.0
     container_name: wso2sp-worker-3
     ports:
-      - "9003:9090"
+      - "9003:9443"
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9003"]
       interval: 10s
@@ -154,10 +154,10 @@ services:
     links:
       - manager1
   worker4:
-    image: docker.wso2.com/wso2sp-worker:4.1.0
+    image: docker.wso2.com/wso2sp-worker:4.2.0
     container_name: wso2sp-worker-4
     ports:
-      - "9004:9090"
+      - "9004:9443"
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9004"]
       interval: 10s
