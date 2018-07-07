@@ -61,7 +61,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-      - ./manager:/home/wso2carbon/volumes/conf/manager
+      - ./manager:/home/wso2carbon/wso2-server-volume/conf/manager
     depends_on:
       mysql:
         condition: service_healthy
@@ -81,7 +81,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-      - ./manager:/home/wso2carbon/volumes/conf/manager
+      - ./manager:/home/wso2carbon/wso2-server-volume/conf/manager
     depends_on:
       manager1:
         condition: service_healthy
@@ -101,7 +101,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/volumes/conf/worker
+       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
     depends_on:
       manager1:
         condition: service_healthy
@@ -122,7 +122,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/volumes/conf/worker
+       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
     depends_on:
       manager1:
         condition: service_healthy
@@ -143,7 +143,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/volumes/conf/worker
+       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
     depends_on:
       manager1:
         condition: service_healthy
@@ -164,7 +164,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/volumes/conf/worker
+       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
     depends_on:
       manager1:
         condition: service_healthy

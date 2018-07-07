@@ -21,7 +21,7 @@ user=wso2carbon
 group=wso2
 
 # file path variables
-volumes=${WORKING_DIRECTORY}/volumes
+volumes=${WORKING_DIRECTORY}/wso2-server-volume
 
 # check if the WSO2 non-root user home exists
 test ! -d ${WORKING_DIRECTORY} && echo "WSO2 Docker non-root user home does not exist" && exit 1
