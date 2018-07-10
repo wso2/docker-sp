@@ -42,6 +42,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./mysql/scripts:/docker-entrypoint-initdb.d
+    command: --max-connections=10000
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-uroot", "-proot"]
       interval: 30s
