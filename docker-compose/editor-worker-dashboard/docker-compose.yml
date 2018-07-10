@@ -35,7 +35,7 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/volumes/conf/worker
+       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
     depends_on:
           mysql:
             condition: service_healthy
@@ -55,4 +55,4 @@ services:
       worker:
         condition: service_healthy
     volumes:
-      - ./dashboard:/home/wso2carbon/volumes/conf/dashboard
+      - ./dashboard:/home/wso2carbon/wso2-server-volume/conf/dashboard
