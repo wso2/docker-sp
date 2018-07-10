@@ -19,6 +19,7 @@ services:
     container_name: wso2sp-editor
     ports:
       - "9743:9743"
+      - "9390:9390"
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9743"]
       interval: 10s
