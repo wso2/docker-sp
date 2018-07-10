@@ -36,7 +36,7 @@ Runs a pre configured Stream Processor setup with Stream Processor editor, worke
 
   4. Access management console via a web browser.
      ```
-     For Status dashboard - https://localhost:9390/monitoring
-     For Editor - https://localhost:9743/editor
+     For Status dashboard - https://localhost:9643/monitoring
+     For Editor - http://localhost:9390/editor
      ```
 
