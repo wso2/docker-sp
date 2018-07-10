@@ -283,7 +283,6 @@ cluster.config:
   # Deployment Configuration for Distributed Deployment
 deployment.config:
   type: distributed
-  isReceiverNode: false
   httpsInterface:
     host: ${NODE_ID}
     port: 9543
