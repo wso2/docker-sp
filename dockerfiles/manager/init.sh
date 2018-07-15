@@ -24,7 +24,7 @@ user=wso2carbon
 group=wso2
 
 # file path variables
-volumes=${WORKING_DIRECTORY}/volumes
+volumes=${WORKING_DIRECTORY}/wso2-server-volume
 k8s_volumes=${WORKING_DIRECTORY}/kubernetes-volumes
 
 # check if the WSO2 non-root user home exists
@@ -45,4 +45,4 @@ if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
 fi
 
 # start the WSO2 Carbon server profile
-sh ${WSO2_SERVER_HOME}/bin/manager.sh
+sh ${WSO2_SERVER_HOME}/bin/manager.sh $*

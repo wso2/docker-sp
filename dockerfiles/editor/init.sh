@@ -21,7 +21,7 @@ user=wso2carbon
 group=wso2
 
 # file path variables
-volumes=${WORKING_DIRECTORY}/volumes
+volumes=${WORKING_DIRECTORY}/wso2-server-volume
 
 # check if the WSO2 non-root user home exists
 test ! -d ${WORKING_DIRECTORY} && echo "WSO2 Docker non-root user home does not exist" && exit 1
@@ -37,4 +37,4 @@ test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
 
 # start the WSO2 Carbon server profile
-sh ${WSO2_SERVER_HOME}/bin/editor.sh
+sh ${WSO2_SERVER_HOME}/bin/editor.sh $*
