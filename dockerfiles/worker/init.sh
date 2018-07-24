@@ -44,5 +44,9 @@ if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
     cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
 fi
 
+if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/bin; then
+    cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/bin/* ${WSO2_SERVER_HOME}/wso2/${WSO2_SERVER_PROFILE}/bin
+fi
+
 # start the WSO2 Carbon server profile
 sh ${WSO2_SERVER_HOME}/bin/worker.sh $*
