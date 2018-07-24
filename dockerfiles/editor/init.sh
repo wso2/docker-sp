@@ -16,12 +16,16 @@
 # ------------------------------------------------------------------------
 set -e
 
+# product profile variable
+WSO2_SERVER_PROFILE=editor
+
 # custom WSO2 non-root user and group variables
 user=wso2carbon
 group=wso2
 
 # file path variables
 volumes=${WORKING_DIRECTORY}/wso2-server-volume
+k8s_volumes=${WORKING_DIRECTORY}/kubernetes-volumes
 
 # check if the WSO2 non-root user home exists
 test ! -d ${WORKING_DIRECTORY} && echo "WSO2 Docker non-root user home does not exist" && exit 1
