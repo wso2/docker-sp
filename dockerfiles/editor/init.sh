@@ -35,7 +35,7 @@ test ! -d ${WSO2_SERVER_HOME} && echo "WSO2 Docker product home does not exist" 
 # if any file changes have been mounted, copy the WSO2 configuration files recursively
 test -d ${volumes} && cp -r ${volumes}/* ${WSO2_SERVER_HOME}/
 
-# check if a ConfigMap volume containing WSO2 worker configuration files has been mounted
+# check if a ConfigMap volume containing WSO2 editor configuration files has been mounted
 if test -d ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf; then
     cp -rL ${k8s_volumes}/${WSO2_SERVER_PROFILE}/conf/* ${WSO2_SERVER_HOME}/conf/${WSO2_SERVER_PROFILE}
 fi
