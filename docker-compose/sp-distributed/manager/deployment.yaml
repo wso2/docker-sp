@@ -80,7 +80,7 @@ databridge.config:
   dataReceivers:
     -
       # Data receiver configuration
-    dataReceiver:
+      dataReceiver:
         # Data receiver type
         # THIS IS A MANDATORY FIELD
       type: Thrift
