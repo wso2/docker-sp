@@ -13,7 +13,8 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 ################################################################################
-   # Carbon Configuration Parameters
+
+  # Carbon Configuration Parameters
 wso2.carbon:
     # value to uniquely identify a server
   id: ${NODE_ID}
@@ -23,7 +24,8 @@ wso2.carbon:
   ports:
       # port offset
     offset: 0
- wso2.transport.http:
+
+wso2.transport.http:
   transportProperties:
     -
       name: "server.bootstrap.socket.timeout"
@@ -34,7 +36,8 @@ wso2.carbon:
     -
       name: "latency.metrics.enabled"
       value: true
-   listenerConfigurations:
+
+  listenerConfigurations:
     -
       id: "default"
       host: "${NODE_IP}"
@@ -47,10 +50,12 @@ wso2.carbon:
       keyStoreFile: "${carbon.home}/resources/security/wso2carbon.jks"
       keyStorePassword: wso2carbon
       certPass: wso2carbon
-   senderConfigurations:
+
+senderConfigurations:
     -
       id: "http-sender"
-   # Configuration used for the databridge communication
+
+# Configuration used for the databridge communication
 databridge.config:
     # No of worker threads to consume events
     # THIS IS A MANDATORY FIELD
@@ -73,7 +78,7 @@ databridge.config:
     # Data receiver configurations
     # THIS IS A MANDATORY FIELD
   dataReceivers:
-  -
+    -
       # Data receiver configuration
     dataReceiver:
         # Data receiver type
@@ -83,7 +88,8 @@ databridge.config:
       properties:
         tcpPort: '7611'
         sslPort: '7711'
-   -
+
+  -
       # Data receiver configuration
     dataReceiver:
         # Data receiver type
@@ -96,7 +102,8 @@ databridge.config:
         tcpReceiverThreadPoolSize: '100'
         sslReceiverThreadPoolSize: '100'
         hostName: ${NODE_IP}
-   # Configuration of the Data Agents - to publish events through databridge
+
+# Configuration of the Data Agents - to publish events through databridge
 data.agent.config:
     # Data agent configurations
     # THIS IS A MANDATORY FIELD
@@ -199,11 +206,13 @@ data.agent.config:
       sslEnabledProtocols: TLSv1.1,TLSv1.2
         # Ciphers
       ciphers: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
-   # Deployment configuration parameters
+
+  # Deployment configuration parameters
 wso2.artifact.deployment:
     # Scheduler update interval
   updateInterval: 5
-   # Periodic Persistence Configuration
+
+# Periodic Persistence Configuration
 state.persistence:
   enabled: false
   intervalInMin: 1
@@ -211,7 +220,8 @@ state.persistence:
   persistenceStore: org.wso2.carbon.stream.processor.core.persistence.FileSystemPersistenceStore
   config:
     location: siddhi-app-persistence
-   # Secure Vault Configuration
+
+# Secure Vault Configuration
 wso2.securevault:
   secretRepository:
     type: org.wso2.carbon.secvault.repository.DefaultSecretRepository
@@ -258,7 +268,8 @@ wso2.datasources:
         connectionTestQuery: SELECT 1
         validationTimeout: 30000
         isAutoCommit: false
-   # Cluster Configuration
+
+# Cluster Configuration
 cluster.config:
   enabled: true
   groupId:  sp-mgt
@@ -268,7 +279,8 @@ cluster.config:
     heartbeatInterval: 1000
     heartbeatMaxRetry: 2
     eventPollingInterval: 1000
-   # Deployment Configuration for Distributed Deployment
+
+  # Deployment Configuration for Distributed Deployment
 deployment.config:
   type: distributed
   httpsInterface:
