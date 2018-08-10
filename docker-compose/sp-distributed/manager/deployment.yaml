@@ -36,7 +36,6 @@ wso2.transport.http:
     -
       name: "latency.metrics.enabled"
       value: true
-
   listenerConfigurations:
     -
       id: "default"
@@ -50,12 +49,11 @@ wso2.transport.http:
       keyStoreFile: "${carbon.home}/resources/security/wso2carbon.jks"
       keyStorePassword: wso2carbon
       certPass: wso2carbon
-
   senderConfigurations:
     -
       id: "http-sender"
 
-  # Configuration used for the databridge communication
+ # Configuration used for the databridge communication
 databridge.config:
     # No of worker threads to consume events
     # THIS IS A MANDATORY FIELD
@@ -103,7 +101,7 @@ databridge.config:
         sslReceiverThreadPoolSize: '100'
         hostName: ${NODE_IP}
 
-  # Configuration of the Data Agents - to publish events through databridge
+ # Configuration of the Data Agents - to publish events through databridge
 data.agent.config:
     # Data agent configurations
     # THIS IS A MANDATORY FIELD
@@ -212,7 +210,7 @@ wso2.artifact.deployment:
     # Scheduler update interval
   updateInterval: 5
 
-  # Periodic Persistence Configuration
+ # Periodic Persistence Configuration
 state.persistence:
   enabled: false
   intervalInMin: 1
@@ -221,7 +219,7 @@ state.persistence:
   config:
     location: siddhi-app-persistence
 
-  # Secure Vault Configuration
+ # Secure Vault Configuration
 wso2.securevault:
   secretRepository:
     type: org.wso2.carbon.secvault.repository.DefaultSecretRepository
@@ -238,7 +236,7 @@ wso2.datasources:
   - name: SP_MGT_DB
     description: The datasource used for registry and user manager
     jndiConfig:
-     name: jdbc/WSO2ClusterDB
+      name: jdbc/WSO2ClusterDB
     definition:
       type: RDBMS
       configuration:
@@ -269,7 +267,7 @@ wso2.datasources:
         validationTimeout: 30000
         isAutoCommit: false
 
-  # Cluster Configuration
+ # Cluster Configuration
 cluster.config:
   enabled: true
   groupId:  sp-mgt
