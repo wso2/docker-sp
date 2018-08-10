@@ -36,7 +36,6 @@ wso2.transport.http:
     -
       name: "latency.metrics.enabled"
       value: true
-
   listenerConfigurations:
     -
       id: "default"
@@ -50,8 +49,7 @@ wso2.transport.http:
       keyStoreFile: "${carbon.home}/resources/security/wso2carbon.jks"
       keyStorePassword: wso2carbon
       certPass: wso2carbon
-
- senderConfigurations:
+  senderConfigurations:
     -
       id: "http-sender"
 
