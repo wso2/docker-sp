@@ -51,11 +51,11 @@ wso2.transport.http:
       keyStorePassword: wso2carbon
       certPass: wso2carbon
 
-senderConfigurations:
+ senderConfigurations:
     -
       id: "http-sender"
 
-# Configuration used for the databridge communication
+ # Configuration used for the databridge communication
 databridge.config:
     # No of worker threads to consume events
     # THIS IS A MANDATORY FIELD
@@ -78,9 +78,9 @@ databridge.config:
     # Data receiver configurations
     # THIS IS A MANDATORY FIELD
   dataReceivers:
-    -
+  -
       # Data receiver configuration
-      dataReceiver:
+    dataReceiver:
         # Data receiver type
         # THIS IS A MANDATORY FIELD
       type: Thrift
@@ -89,9 +89,9 @@ databridge.config:
         tcpPort: '7611'
         sslPort: '7711'
 
-    -
+  -
       # Data receiver configuration
-      dataReceiver:
+    dataReceiver:
         # Data receiver type
         # THIS IS A MANDATORY FIELD
       type: Binary
@@ -103,14 +103,14 @@ databridge.config:
         sslReceiverThreadPoolSize: '100'
         hostName: ${NODE_IP}
 
-# Configuration of the Data Agents - to publish events through databridge
+ # Configuration of the Data Agents - to publish events through databridge
 data.agent.config:
     # Data agent configurations
     # THIS IS A MANDATORY FIELD
   agents:
-    -
+  -
       # Data agent configuration
-      agentConfiguration:
+    agentConfiguration:
         # Data agent name
         # THIS IS A MANDATORY FIELD
       name: Thrift
@@ -157,9 +157,9 @@ data.agent.config:
       sslEnabledProtocols: TLSv1.1,TLSv1.2
         # Ciphers
       ciphers: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
-    -
+  -
       # Data agent configuration
-      agentConfiguration:
+    agentConfiguration:
         # Data agent name
         # THIS IS A MANDATORY FIELD
       name: Binary
@@ -212,7 +212,7 @@ wso2.artifact.deployment:
     # Scheduler update interval
   updateInterval: 5
 
-# Periodic Persistence Configuration
+ # Periodic Persistence Configuration
 state.persistence:
   enabled: false
   intervalInMin: 1
@@ -221,7 +221,7 @@ state.persistence:
   config:
     location: siddhi-app-persistence
 
-# Secure Vault Configuration
+ # Secure Vault Configuration
 wso2.securevault:
   secretRepository:
     type: org.wso2.carbon.secvault.repository.DefaultSecretRepository
@@ -235,7 +235,7 @@ wso2.securevault:
       masterKeyReaderFile: ${sys:carbon.home}/conf/${sys:wso2.runtime}/master-keys.yaml
 wso2.datasources:
   dataSources:
-    - name: SP_MGT_DB
+  - name: SP_MGT_DB
     description: The datasource used for registry and user manager
     jndiConfig:
       name: jdbc/WSO2ClusterDB
@@ -251,7 +251,7 @@ wso2.datasources:
         connectionTestQuery: SELECT 1
         validationTimeout: 30000
         isAutoCommit: false
-    - name: WSO2_PERMISSIONS_DB
+  - name: WSO2_PERMISSIONS_DB
     description: The datasource used for permission feature
     jndiConfig:
       name: jdbc/PERMISSION_DB
@@ -269,7 +269,7 @@ wso2.datasources:
         validationTimeout: 30000
         isAutoCommit: false
 
-# Cluster Configuration
+ # Cluster Configuration
 cluster.config:
   enabled: true
   groupId:  sp-mgt
