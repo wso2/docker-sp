@@ -97,7 +97,7 @@ services:
     ports:
       - "9001:9443"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9001"]
+      test: ["CMD", "nc", "-z","localhost", "9443"]
       interval: 10s
       timeout: 120s
       retries: 5
@@ -109,7 +109,6 @@ services:
     environment:
       NODE_ID: wso2sp-worker-1
       NODE_IP: 0.0.0.0
-      NODE_PORT: 9001
     links:
       - manager1
   worker2:
@@ -118,7 +117,7 @@ services:
     ports:
       - "9002:9443"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9002"]
+      test: ["CMD", "nc", "-z","localhost", "9443"]
       interval: 10s
       timeout: 120s
       retries: 5
@@ -130,7 +129,6 @@ services:
     environment:
       NODE_ID: wso2sp-worker-2
       NODE_IP: 0.0.0.0
-      NODE_PORT: 9002
     links:
       - manager1
   worker3:
@@ -139,7 +137,7 @@ services:
     ports:
       - "9003:9443"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9003"]
+      test: ["CMD", "nc", "-z","localhost", "9443"]
       interval: 10s
       timeout: 120s
       retries: 5
@@ -151,7 +149,6 @@ services:
     environment:
       NODE_ID: wso2sp-worker-3
       NODE_IP: 0.0.0.0
-      NODE_PORT: 9003
     links:
       - manager1
   worker4:
@@ -160,7 +157,7 @@ services:
     ports:
       - "9004:9443"
     healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9004"]
+      test: ["CMD", "nc", "-z","localhost", "9443"]
       interval: 10s
       timeout: 120s
       retries: 5
@@ -172,6 +169,5 @@ services:
     environment:
       NODE_ID: wso2sp-worker-4
       NODE_IP: 0.0.0.0
-      NODE_PORT: 9004
     links:
       - manager1
