@@ -17,7 +17,7 @@
 # ------------------------------------------------------------------------
 
 # set to latest Ubuntu LTS
-FROM wso2sp-base:4.2.0
+FROM wso2sp-base:4.3.0
 MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
 # copy entrypoint bash script to user home

@@ -18,8 +18,13 @@ hs_err_pid*
 
 # IntelliJ IDEA
 .idea/
-*.iml
+*.iml
 
 rat.txt
-dockerfiles/base/files/*
-dockerfiles/kafka/files/*
+.DS_Store
+
+# exclude everything
+**/files/*
+
+# exception to the rule
+!**/files/.gitkeep
