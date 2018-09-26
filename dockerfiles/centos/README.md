@@ -6,7 +6,7 @@ WSO2 Stream Processor 4.3.0, namely : <br>
 2. Editor
 3. Manager
 4. Worker
-5. Kafka
+
 
 ## How to build the WSO2 Stream Processor images and run
 
@@ -88,22 +88,6 @@ The list of required client jars are;
     + `http://<DOCKER_HOST>:9390/editor`
     
 >In here, <DOCKER_HOST> refers to hostname or IP of the host machine on top of which containers are spawned.
-
-## How to build the Kafka docker image
-
-> In order to run a distributed Stream Processor setup, Kafka is required. This section provide the steps to build the
-Kafka docker image.
-
-##### 1. Copy the extract JDK and Kafka distributions to `<DOCKERFILE_HOME>/kafka/files`.
-- Download [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-and extract it to `<DOCKERFILE_HOME>/kafka/files`.
-- Download [Kafka 2.11-0.10.0.0](https://kafka.apache.org/downloads) and extract it to
-`<DOCKERFILE_HOME>/kafka/files`.
-
-##### 2. Build the base Docker image.
-- Navigate to `<DOCKERFILE_HOME>/kafka` directory.
-  Execute `docker build` command as shown below.
-    + `docker build -t kafka:2.11-0.10.0.0 .`
 
 ## Docker command usage references
 
