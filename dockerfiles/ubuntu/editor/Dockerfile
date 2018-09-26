@@ -17,13 +17,13 @@
 # ------------------------------------------------------------------------
 
 # set to latest Ubuntu LTS
-FROM wso2sp-base:4.2.0
+FROM wso2sp-base:4.3.0
 MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
 # copy entrypoint bash script to user home
 COPY --chown=wso2carbon:wso2 init.sh ${WORKING_DIRECTORY}/
 
 # expose ports
-EXPOSE 9714 9643 9614 7713 7613
+EXPOSE 9743 9715 9615 9390 7714 7614
 
 ENTRYPOINT ["/home/wso2carbon/init.sh"]
