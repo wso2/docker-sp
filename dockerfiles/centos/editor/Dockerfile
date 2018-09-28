@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------
 #
-# Copyright 2017 WSO2, Inc. (http://wso2.com)
+# Copyright 2018 WSO2, Inc. (http://wso2.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,6 @@ MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 COPY --chown=wso2carbon:wso2 init.sh ${WORKING_DIRECTORY}/
 
 # expose ports
-EXPOSE 9743 9715 9615 9390 7714 7614
+EXPOSE 9743 9390 7370 7714 7614 9614 9714
 
 ENTRYPOINT ["/home/wso2carbon/init.sh"]

@@ -1,34 +1,46 @@
 # Dockerfiles for WSO2 Stream Processor #
 
-This section defines Dockerfiles and step-by-step instructions to build Docker images for product profiles provided by
-WSO2 Stream Processor 4.3.0, namely : <br>
+This section defines the step-by-step instructions to build [CentOS](https://hub.docker.com/_/centos/) Linux based Docker images for multiple profiles
+provided by WSO2 Stream Processor 4.3.0, namely:<br>
+
 1. Dashboard
 2. Editor
 3. Manager
 4. Worker
 
+## Prerequisites
+
+* [Docker](https://www.docker.com/get-docker) v17.09.0 or above
 
 ## How to build the WSO2 Stream Processor images and run
 
 ##### 1. Checkout this repository into your local machine using the following Git command.
+
 ```
 git clone https://github.com/wso2/docker-sp.git
 ```
 
->The local copy of the `dockerfiles` directory will be referred to as `DOCKERFILE_HOME` from this point onwards.
+>The local copy of the `dockerfiles/centos` directory will be referred to as `DOCKERFILE_HOME` from this point onwards.
 
-##### 2. Copy the extract JDK and WSO2 Stream Processor distributions to `<DOCKERFILE_HOME>/base/files`
-- Download [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 
+##### 2. Copy the extract JDK and WSO2 Stream Processor distributions to `<DOCKERFILE_HOME>/base/files`.
+
+- Download [JDK v1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) 
 and extract it to `<DOCKERFILE_HOME>/base/files`.
 - Download [WSO2 Stream Processor 4.3.0 distribution](https://github.com/wso2/product-sp/releases) 
 and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
+- Download [MySQL Connector JAR v5.1.45](https://downloads.mysql.com/archives/c-j) and copy that to `<DOCKERFILE_HOME>/base/files` folder.<br>
+- Once all of these are in place, it should look as follows:
 
-##### 3. Download [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) v5.1.45 and copy the jar to `<DOCKERFILE_HOME>/base/files`
-   ```
-   cp path/to/mysql/connector/jar <DOCKERFILE_HOME>/base/files
-   ```
+  ```bash
+  <DOCKERFILE_HOME>/base/files/jdk<version>/
+  <DOCKERFILE_HOME>/base/files/mysql-connector-java-5.1.45-bin.jar
+  <DOCKERFILE_HOME>/base/files/wso2sp-4.3.0/
+  ```
+  
+>Please refer to [WSO2 Update Manager documentation](https://docs.wso2.com/display/WUM300/WSO2+Update+Manager)
+in order to obtain latest bug fixes and updates for the product.
 
-##### 4. Convert and copy the Kafka client jars from the `kafka_2.11-0.10.0.0/libs/` to `<DOCKERFILE_HOME>/base/files` directory
+##### 3. Convert and copy the Kafka client jars from the `kafka_2.11-0.10.0.0/libs/` to `<DOCKERFILE_HOME>/base/files` directory
 
 The list of required client jars are;
 
@@ -46,13 +58,14 @@ The list of required client jars are;
   ./wso2sp-4.3.0/bin/jartobundle.sh path/to/kafka/client/jar <DOCKERFILE_HOME>/base/files
   ```
 
-
 ##### 4. Build the base Docker image.
+
 - For base, navigate to `<DOCKERFILE_HOME>/base` directory. <br>
   Execute `docker build` command as shown below.
     + `docker build -t wso2sp-base:4.3.0-centos .`
         
 ##### 5. Build Docker images specific to each profile.
+
 - For Dashboard, navigate to `<DOCKERFILE_HOME>/dashboard` directory. <br>
   Execute `docker build` command as shown below. 
     + `docker build -t wso2sp-dashboard:4.3.0-centos .`
@@ -67,6 +80,7 @@ The list of required client jars are;
     + `docker build -t wso2sp-worker:4.3.0-centos .`
     
 ##### 6. Running Docker images specific to each profile.
+
 - For Dashboard,
     + `docker run -it -p 9643:9643 wso2sp-dashboard:4.3.0-centos`
 - For Editor,
@@ -77,6 +91,7 @@ The list of required client jars are;
     + `docker run -it wso2sp-worker:4.3.0-centos`   
 
 ##### 7. Accessing management console per each profile.
+
 - For Dashboard,
     + Business Rules:<br>
     `https://<DOCKER_HOST>:9643/business-rules`
@@ -88,6 +103,32 @@ The list of required client jars are;
     + `http://<DOCKER_HOST>:9390/editor`
     
 >In here, <DOCKER_HOST> refers to hostname or IP of the host machine on top of which containers are spawned.
+
+## How to update configurations
+
+Configurations would lie on the Docker host machine and they can be volume mounted to the container. <br>
+As an example, steps required to change the port offset using `deployment.yaml` is as follows.
+
+##### 1. Stop the Identity Server Analytics container if it's already running.
+
+In WSO2 Stream Processor 4.3.0 product distribution, `deployment.yaml` configuration file <br>
+can be found at `<DISTRIBUTION_HOME>/conf/worker`. Copy the file to some suitable location of the host machine, <br>
+referred to as `<SOURCE_CONFIGS>/deployment.yaml` and change the offset value under ports to 2.
+
+##### 2. Grant read permission to `other` users for `<SOURCE_CONFIGS>/deployment.yaml`
+```
+chmod o+r <SOURCE_CONFIGS>/deployment.yaml
+```
+
+##### 3. Run the image by mounting the file to container as follows.
+```
+docker run 
+-p 7713:7713
+--volume <SOURCE_CONFIGS>/deployment.yaml:<TARGET_CONFIGS>/deployment.yaml
+wso2sp-worker:4.3.0-centos
+```
+
+>In here, <TARGET_CONFIGS> refers to /home/wso2carbon/wso2sp-4.3.0/conf/worker folder of the container.
 
 ## Docker command usage references
 

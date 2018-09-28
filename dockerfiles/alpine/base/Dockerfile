@@ -33,7 +33,7 @@ ARG FILES=./files
 ARG WSO2_SERVER=wso2sp
 ARG WSO2_SERVER_VERSION=4.3.0
 ARG WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}
-ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}-${WSO2_SERVER_VERSION}
+ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER_PACK}
 ENV ENV=${USER_HOME}"/.ashrc"
 
 # install required packages
@@ -46,6 +46,7 @@ RUN  apk add --update --no-cache \
 RUN  addgroup -g ${USER_GROUP_ID} ${USER_GROUP}; \
      adduser -u ${USER_ID} -D -g '' -h ${USER_HOME} -G ${USER_GROUP} ${USER} ;
 
+# MOTD login message
 RUN echo 'printf "Welcome to WSO2 Docker resources.\n\
 ----------------------------------\n\
 The Docker container contains the WSO2 product with its latest updates,\n\
@@ -53,7 +54,7 @@ which are under the End User License Agreement (EULA) 2.0.\n\
 Read more about EULA 2.0 (https://wso2.com/licenses/wso2-update/2.0).\n"' > "$ENV"
 
 # copy the jdk and wso2 product distribution zip files to user's home directory
-COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_PACK}/ ${USER_HOME}/${WSO2_SERVER_PACK}/
+COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_PACK}/ ${WSO2_SERVER_HOME}/
 
 # copy the jdk and wso2 product distribution zip files to user's home directory
 COPY --chown=wso2carbon:wso2 ${FILES}/kafka_2.11_0.10.0.0_1.0.0.jar ${USER_HOME}/${WSO2_SERVER_PACK}/lib/

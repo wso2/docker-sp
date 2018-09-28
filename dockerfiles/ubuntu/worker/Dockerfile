@@ -24,6 +24,6 @@ MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 COPY --chown=wso2carbon:wso2 init.sh ${WORKING_DIRECTORY}/
 
 # expose ports
-EXPOSE 9090 9443 9712 9612 7711 7611
+EXPOSE 9090 9443 9712 9612 7711 7611 7070 7443
 
 ENTRYPOINT ["/home/wso2carbon/init.sh"]
