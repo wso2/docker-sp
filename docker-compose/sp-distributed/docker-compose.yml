@@ -52,7 +52,7 @@ services:
       kafka:
         condition: service_healthy
   manager1:
-    image: docker.wso2.com/wso2sp-manager:4.2.0
+    image: docker.wso2.com/wso2sp-manager:4.3.0
     container_name: wso2sp-manager-1
     ports:
       - "9543:9543"
@@ -62,17 +62,15 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-      - ./manager:/home/wso2carbon/wso2-server-volume/conf/manager
+      - ./manager:/home/wso2carbon/wso2-config-volume
     depends_on:
       mysql:
         condition: service_healthy
     environment:
       NODE_ID: wso2sp-manager-1
       NODE_IP: 0.0.0.0
-    links:
-      - mysql
   manager2:
-    image: docker.wso2.com/wso2sp-manager:4.2.0
+    image: docker.wso2.com/wso2sp-manager:4.3.0
     container_name: wso2sp-manager-2
     ports:
       - "9544:9543"
@@ -82,17 +80,15 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-      - ./manager:/home/wso2carbon/wso2-server-volume/conf/manager
+      - ./manager:/home/wso2carbon/wso2-config-volume
     depends_on:
       manager1:
         condition: service_healthy
     environment:
           NODE_ID: wso2sp-manager-2
           NODE_IP: 0.0.0.0
-    links:
-      - manager1
   worker1:
-    image: docker.wso2.com/wso2sp-worker:4.2.0
+    image: docker.wso2.com/wso2sp-worker:4.3.0
     container_name: wso2sp-worker-1
     ports:
       - "9001:9443"
@@ -102,17 +98,15 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
+       - ./worker:/home/wso2carbon/wso2-config-volume
     depends_on:
       manager1:
         condition: service_healthy
     environment:
       NODE_ID: wso2sp-worker-1
       NODE_IP: 0.0.0.0
-    links:
-      - manager1
   worker2:
-    image: docker.wso2.com/wso2sp-worker:4.2.0
+    image: docker.wso2.com/wso2sp-worker:4.3.0
     container_name: wso2sp-worker-2
     ports:
       - "9002:9443"
@@ -122,17 +116,15 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
+       - ./worker:/home/wso2carbon/wso2-config-volume
     depends_on:
       manager1:
         condition: service_healthy
     environment:
       NODE_ID: wso2sp-worker-2
       NODE_IP: 0.0.0.0
-    links:
-      - manager1
   worker3:
-    image: docker.wso2.com/wso2sp-worker:4.2.0
+    image: docker.wso2.com/wso2sp-worker:4.3.0
     container_name: wso2sp-worker-3
     ports:
       - "9003:9443"
@@ -142,17 +134,15 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
+       - ./worker:/home/wso2carbon/wso2-config-volume
     depends_on:
       manager1:
         condition: service_healthy
     environment:
       NODE_ID: wso2sp-worker-3
       NODE_IP: 0.0.0.0
-    links:
-      - manager1
   worker4:
-    image: docker.wso2.com/wso2sp-worker:4.2.0
+    image: docker.wso2.com/wso2sp-worker:4.3.0
     container_name: wso2sp-worker-4
     ports:
       - "9004:9443"
@@ -162,12 +152,10 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-       - ./worker:/home/wso2carbon/wso2-server-volume/conf/worker
+       - ./worker:/home/wso2carbon/wso2-config-volume
     depends_on:
       manager1:
         condition: service_healthy
     environment:
       NODE_ID: wso2sp-worker-4
       NODE_IP: 0.0.0.0
-    links:
-      - manager1
