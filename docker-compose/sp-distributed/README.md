@@ -44,6 +44,4 @@
        Manager 1 - https://localhost:9543/
        Manager 2 - https://localhost:9544/
        ```
- > Refer [Stream Processor Fully Distributed Deployment](https://docs.wso2.com/display/SP420/Fully+Distributed+Deployment)   
-     
-
+ > Refer [Stream Processor Fully Distributed Deployment](https://docs.wso2.com/display/SP420/Fully+Distributed+Deployment)
