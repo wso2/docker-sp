@@ -20,6 +20,7 @@ set -e
 # volume mounts
 config_volume=${WORKING_DIRECTORY}/wso2-config-volume
 artifact_volume=${WORKING_DIRECTORY}/wso2-artifact-volume
+siddhi_files_volume=${WORKING_DIRECTORY}/siddhi-files
 
 # capture Docker container IP from the container's /etc/hosts file
 docker_container_ip=$(awk 'END{print $1}' /etc/hosts)
@@ -34,6 +35,8 @@ test ! -d ${WSO2_SERVER_HOME} && echo "WSO2 Docker product home does not exist" 
 test -d ${config_volume}/ && cp -RL ${config_volume}/* ${WSO2_SERVER_HOME}/
 # copy any artifact changes mounted to artifact_volume
 test -d ${artifact_volume}/ && cp -RL ${artifact_volume}/* ${WSO2_SERVER_HOME}/
+# copy siddhi files mounted to siddhi_files_volume
+test -d ${siddhi_files_volume}/ && cp -r ${siddhi_files_volume}/* ${WSO2_SERVER_HOME}/wso2/editor/deployment/workspace/
 
 # start the WSO2 Carbon server profile
 sh ${WSO2_SERVER_HOME}/bin/editor.sh $*
