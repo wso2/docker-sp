@@ -22,7 +22,7 @@ git clone https://github.com/wso2/docker-sp.git
 
 >The local copy of the `dockerfiles/alpine` directory will be referred to as `DOCKERFILE_HOME` from this point onwards.
 
-##### 2. Copy the extract JDK and WSO2 Stream Processor distributions to `<DOCKERFILE_HOME>/base/files`.
+##### 2. Copy the extract WSO2 Stream Processor distribution to `<DOCKERFILE_HOME>/base/files`.
 
 - Download [WSO2 Stream Processor 4.3.0 distribution](https://github.com/wso2/product-sp/releases) 
 and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
