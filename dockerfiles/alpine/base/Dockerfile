@@ -37,9 +37,7 @@ ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER_PACK}
 ENV ENV=${USER_HOME}"/.ashrc"
 
 # install required packages
-RUN  apk add --update --no-cache \
-     curl \
-     netcat-openbsd && \
+RUN  apk add --update --no-cache netcat-openbsd && \
      rm -rf /var/cache/apk/*
 
 # create a user group and a user
