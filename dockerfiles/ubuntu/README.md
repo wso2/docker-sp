@@ -26,11 +26,11 @@ git clone https://github.com/wso2/docker-sp.git
 
 - Download [WSO2 Stream Processor 4.3.0 distribution](https://github.com/wso2/product-sp/releases) 
 and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
-- Download [MySQL Connector JAR v5.1.45](https://downloads.mysql.com/archives/c-j) and copy that to `<DOCKERFILE_HOME>/base/files` folder.<br>
+- Download [MySQL Connector/J](https://downloads.mysql.com/archives/c-j) and copy that to `<DOCKERFILE_HOME>/base/files` folder.<br>
 - Once all of these are in place, it should look as follows:
 
   ```bash
-  <DOCKERFILE_HOME>/base/files/mysql-connector-java-5.1.45-bin.jar
+  <DOCKERFILE_HOME>/base/files/mysql-connector-java-<version>-bin.jar
   <DOCKERFILE_HOME>/base/files/wso2sp-4.3.0/
   ```
   
