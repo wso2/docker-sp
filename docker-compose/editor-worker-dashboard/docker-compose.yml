@@ -15,7 +15,7 @@ services:
       timeout: 60s
       retries: 5
   editor:
-    image: docker.wso2.com/wso2sp-editor:4.3.0
+    image: wso2/wso2sp-editor:4.3.0
     container_name: wso2sp-editor
     ports:
       - "9743:9743"
@@ -26,7 +26,7 @@ services:
       timeout: 120s
       retries: 5
   worker:
-    image: docker.wso2.com/wso2sp-worker:4.3.0
+    image: wso2/wso2sp-worker:4.3.0
     container_name: wso2sp-worker
     ports:
       - "9090:9090"
@@ -41,7 +41,7 @@ services:
       mysql:
         condition: service_healthy
   dashboard:
-    image: docker.wso2.com/wso2sp-dashboard:4.3.0
+    image: wso2/wso2sp-dashboard:4.3.0
     container_name: wso2sp-dashboard
     ports:
       - "9643:9643"
