@@ -62,7 +62,8 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-      - ./manager:/home/wso2carbon/wso2-config-volume
+      - "./manager/conf:/home/wso2carbon/wso2-config-volume/conf"
+      - "./manager/siddhi-files:/home/wso2carbon/wso2sp-4.3.0/wso2/manager/deployment/siddhi-files"
     depends_on:
       mysql:
         condition: service_healthy
@@ -80,7 +81,8 @@ services:
       timeout: 120s
       retries: 5
     volumes:
-      - ./manager:/home/wso2carbon/wso2-config-volume
+      - "./manager/conf:/home/wso2carbon/wso2-config-volume/conf"
+      - "./manager/siddhi-files:/home/wso2carbon/wso2sp-4.3.0/wso2/manager/deployment/siddhi-files"
     depends_on:
       manager1:
         condition: service_healthy
@@ -122,40 +124,4 @@ services:
         condition: service_healthy
     environment:
       NODE_ID: wso2sp-worker-2
-      NODE_IP: 0.0.0.0
-  worker3:
-    image: docker.wso2.com/wso2sp-worker:4.3.0
-    container_name: wso2sp-worker-3
-    ports:
-      - "9003:9443"
-    healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9443"]
-      interval: 10s
-      timeout: 120s
-      retries: 5
-    volumes:
-       - ./worker:/home/wso2carbon/wso2-config-volume
-    depends_on:
-      manager1:
-        condition: service_healthy
-    environment:
-      NODE_ID: wso2sp-worker-3
-      NODE_IP: 0.0.0.0
-  worker4:
-    image: docker.wso2.com/wso2sp-worker:4.3.0
-    container_name: wso2sp-worker-4
-    ports:
-      - "9004:9443"
-    healthcheck:
-      test: ["CMD", "nc", "-z","localhost", "9443"]
-      interval: 10s
-      timeout: 120s
-      retries: 5
-    volumes:
-       - ./worker:/home/wso2carbon/wso2-config-volume
-    depends_on:
-      manager1:
-        condition: service_healthy
-    environment:
-      NODE_ID: wso2sp-worker-4
       NODE_IP: 0.0.0.0
