@@ -36,7 +36,8 @@
      ```
   4. Siddhi applications should be deployed to the manager cluster using following method.
   
-  Sending a "POST" request to http://<host>:<port>/siddhi-apps, with the Siddhi App attached as a file in the request as shown in the example below. 
+  - Copy the distributed siddhi app to **_sp-distributed/manager/siddhi-files_** directory.
+- Sending a "POST" request to http://<host>:<port>/siddhi-apps, with the Siddhi App attached as a file in the request as shown in the example below. 
   Refer [Stream Processor REST API Guide](https://docs.wso2.com/display/SP420/Stream+Processor+REST+API+Guide) for more information on using WSO2 Strean Processor APIs.
   
   Manager nodes are deployed under,
@@ -44,6 +45,4 @@
        Manager 1 - https://localhost:9543/
        Manager 2 - https://localhost:9544/
        ```
- > Refer [Stream Processor Fully Distributed Deployment](https://docs.wso2.com/display/SP420/Fully+Distributed+Deployment)   
-     
-
+> Refer [Stream Processor Fully Distributed Deployment Documentation](https://docs.wso2.com/display/SP4xx/Fully+Distributed+Deployment)
