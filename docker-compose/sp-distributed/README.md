@@ -34,9 +34,9 @@
      ```
      docker-compose up
      ```
-  4. Siddhi applications should be deployed to the manager cluster using following method.
+  4. Siddhi applications should be deployed to the manager cluster using either one of the following methods. The deployed Siddhi apps will be automatically synchronized between the two managers through a volume mount.
   
-  - Copy the distributed siddhi app to **_sp-distributed/manager/siddhi-files_** directory.
+  - Copying the distributed siddhi app to **_sp-distributed/manager/siddhi-files_** directory.
 - Sending a "POST" request to http://<host>:<port>/siddhi-apps, with the Siddhi App attached as a file in the request as shown in the example below. 
   Refer [Stream Processor REST API Guide](https://docs.wso2.com/display/SP420/Stream+Processor+REST+API+Guide) for more information on using WSO2 Strean Processor APIs.
   
