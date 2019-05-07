@@ -9,7 +9,7 @@ Runs a pre configured WSO2 Stream Processor setup of Stream Processor editor, wo
  * In order to run this Docker Compose setup, you will need an active subscription from WSO2 since the referring Docker images hosted at docker.wso2.com contains the latest updates and fixes for WSO2 Stream Processor. You can sign up for a Free Trial Subscription [here](https://wso2.com/free-trial-subscription). <br><br>
  * If you wish to run the Docker Compose configuration using Docker images built locally, build the Stream Processor editor, worker and 
    dashboard images using [SP Dockerfiles](../../dockerfiles) and remove the `docker.wso2.com/` prefix 
-   from the `image` name in the `docker-compose.yml`. For example, change the line `image: docker.wso2.com/wso2sp-manager:4.3.0` <br> to `image: wso2sp-manager:4.3.0`. <br><br>
+   from the `image` name in the `docker-compose.yml`. For example, change the line `image: docker.wso2.com/wso2sp-manager:4.4.0` <br> to `image: wso2sp-manager:4.4.0`. <br><br>
 
 ## How to deploy
 
