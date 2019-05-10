@@ -267,7 +267,8 @@ state.persistence:
   revisionsToKeep: 2
   persistenceStore: org.wso2.carbon.stream.processor.core.persistence.FileSystemPersistenceStore
   config:
-    location: siddhi-app-persistence
+    datasource: SP_WORKER_STATE_DB   # A datasource with this name should be defined in wso2.datasources namespace
+    table: PERSISTENCE_TABLE
   # Secure Vault Configuration
 wso2.securevault:
   secretRepository:
