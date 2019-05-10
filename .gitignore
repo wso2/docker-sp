@@ -23,10 +23,6 @@ hs_err_pid*
 rat.txt
 .DS_Store
 
-# meta data files
-.metadata
-sp-docker-meta.yaml
-
 # exclude everything
 **/files/*
 
