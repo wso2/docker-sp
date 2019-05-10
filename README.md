@@ -2,7 +2,7 @@
 
 This repository contains following Docker resources:
 
-- Per profile Docker resources of WSO2 Stream Processor v4.3.x for Alpine, CentOS, Ubuntu
+- Per profile Docker resources of WSO2 Stream Processor v4.4.x for Alpine, CentOS, Ubuntu
 - Docker Compose resources to evaluate most common Stream Processing deployment patterns
 
 Per profile Docker resources of WSO2 Stream Processor help you build generic Docker images for deploying the
@@ -14,4 +14,4 @@ Docker Compose files have been created according to the most common Stream Proce
 to quickly evaluate product features along side their co-operate requirements. The Compose files make use of per profile
 Docker images of WSO2 Stream Processor and MySQL.
 
-**Change log** from previous v4.3.0.1 release: [View Here](CHANGELOG.md)
+**Change log** from previous v4.4.0.1 release: [View Here](CHANGELOG.md)
