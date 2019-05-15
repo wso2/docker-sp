@@ -16,7 +16,7 @@
 #
 # ------------------------------------------------------------------------
 
-# set base Docker image to AdoptOpenJDK Ubuntu Docker image
+# set base docker image to adoptopenjdk ubuntu based docker image
 FROM adoptopenjdk/openjdk8:jdk8u212-b03
 MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
