@@ -52,7 +52,7 @@ services:
       kafka:
         condition: service_healthy
   manager1:
-    image: docker.wso2.com/wso2sp-manager:4.4.0-centos
+    image: wso2/wso2sp-manager:4.4.0
     container_name: wso2sp-manager-1
     ports:
       - "9543:9543"
@@ -71,7 +71,7 @@ services:
       NODE_ID: wso2sp-manager-1
       NODE_IP: 0.0.0.0
   manager2:
-    image: docker.wso2.com/wso2sp-manager:4.4.0-centos
+    image: wso2/wso2sp-manager:4.4.0
     container_name: wso2sp-manager-2
     ports:
       - "9544:9543"
@@ -90,7 +90,7 @@ services:
           NODE_ID: wso2sp-manager-2
           NODE_IP: 0.0.0.0
   worker1:
-    image: docker.wso2.com/wso2sp-worker:4.4.0-centos
+    image: wso2/wso2sp-worker:4.4.0
     container_name: wso2sp-worker-1
     ports:
       - "9001:9443"
@@ -108,7 +108,7 @@ services:
       NODE_ID: wso2sp-worker-1
       NODE_IP: 0.0.0.0
   worker2:
-    image: docker.wso2.com/wso2sp-worker:4.4.0-centos
+    image: wso2/wso2sp-worker:4.4.0
     container_name: wso2sp-worker-2
     ports:
       - "9002:9443"
