@@ -36,9 +36,9 @@ Runs a pre configured WSO2 Stream Processor setup of Stream Processor editor, wo
     
    **Note**: By default, each product profile service is configured to use WSO2 product Docker images with GA releases.
 
-  4. Execute the following Docker Compose command to start the deployment.
+  4. Execute the `deploy.sh` script to start the deployment.
      ```
-     docker-compose up
+     ./deploy.sh
      ```
 
   5. Access management console via a web browser.

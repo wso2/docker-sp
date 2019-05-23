@@ -1,0 +1,368 @@
+# Copyright 2019 WSO2, Inc. (http://wso2.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License
+# ----------------------------------------------------------------------
+---
+# command line arguments
+params:
+  existing_version: 4.3.0
+  new_version: 4.4.0
+  wso2sp: "wso2sp-4.4.0"
+# files based configurations
+files:
+  - file_path: docker-compose/editor-worker-dashboard/docker-compose.yml
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: docker-compose/editor-worker-dashboard/README.md
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: docker-compose/editor-worker-dashboard/dashboard/conf/dashboard/deployment.yaml
+    relative_path: "{$arg.wso2sp}/conf/dashboard/deployment.yaml"
+    file_type: yaml
+    configurations:
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_STATUS_DASHBOARD_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:mysql://mysql:3306/WSO2_STATUS_DASHBOARD_DB?useSSL=false"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_STATUS_DASHBOARD_DB\"]/definition/configuration/username"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_STATUS_DASHBOARD_DB\"]/definition/configuration/password"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_STATUS_DASHBOARD_DB\"]/definition/configuration/driverClassName"
+        value: "com.mysql.jdbc.Driver"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:mysql://mysql:3306/WSO2_METRICS_DB?useSSL=false"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/username"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/password"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/driverClassName"
+        value: "com.mysql.jdbc.Driver"
+  - file_path: "docker-compose/editor-worker-dashboard/worker/conf/worker/deployment.yaml"
+    relative_path: "{$arg.wso2sp}/conf/worker/deployment.yaml"
+    file_type: "yaml"
+    configurations:
+      - operation: "replace"
+        xpath: "wso2.metrics/enabled"
+        value: true
+      - operation: "replace"
+        xpath: "wso2.metrics.jdbc/dataSource[dataSourceName=\"java:comp/env/jdbc/WSO2MetricsDB\"]/scheduledCleanup/daysToKeep"
+        value: 7
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:mysql://mysql:3306/WSO2_METRICS_DB?useSSL=false"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/username"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/password"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_METRICS_DB\"]/definition/configuration/driverClassName"
+        value: "com.mysql.jdbc.Driver"
+
+  - file_path: docker-compose/sp-distributed/docker-compose.yml
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: docker-compose/sp-distributed/README.md
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: "docker-compose/sp-distributed/manager/conf/manager/deployment.yaml"
+    relative_path: "{$arg.wso2sp}/conf/manager/deployment.yaml"
+    file_type: "yaml"
+    configurations:
+      - operation: "replace"
+        xpath: "wso2.carbon/id"
+        value: "${NODE_ID}"
+      - operation: "replace"
+        xpath: "wso2.carbon/ports/offset"
+        value: 0
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"default\"]/host"
+        value: "${NODE_IP}"
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"msf4j-https\"]/host"
+        value: "${NODE_IP}"
+      - operation: "replace"
+        xpath: "databridge.config/dataReceivers/dataReceiver[type=\"Binary\"]/properties/hostName"
+        value: "${NODE_IP}"
+#      - operation: "update"
+#        xpath: "wso2.datasources/dataSources[name=\"SP_MGT_DB\"]"
+#        value:
+#         |
+#         jndiConfig:
+#           name: jdbc/WSO2ClusterDB
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"SP_MGT_DB\"]/definition/configuration/jdbcUrl"
+        value: "jdbc:mysql://sp-rdbms:3306/SP_MGT_DB?useSSL=false"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"SP_MGT_DB\"]/definition/configuration/username"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"SP_MGT_DB\"]/definition/configuration/password"
+        value: "root"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"SP_MGT_DB\"]/definition/configuration/driverClassName"
+        value: "com.mysql.jdbc.Driver"
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"SP_MGT_DB\"]/definition/configuration/maxPoolSize"
+        value: 50
+      - operation: "replace"
+        xpath: "wso2.datasources/dataSources[name=\"WSO2_PERMISSIONS_DB\"]/definition/configuration/maxPoolSize"
+        value: 50
+      - operation: "replace"
+        xpath: "cluster.config/enabled"
+        value: true
+      - operation: "replace"
+        xpath: "cluster.config/groupId"
+        value: "sp-mgt"
+      - operation: "replace"
+        xpath: "deployment.config/httpsInterface/host"
+        value: "${NODE_ID}"
+      - operation: "replace"
+        xpath: "deployment.config/bootstrapURLs"
+        value: "kafka:9092"
+      - operation: "replace"
+        xpath: "deployment.config/zooKeeperConfig/zooKeeperURLs"
+        value: "zookeeper:2181"
+  - file_path: "docker-compose/sp-distributed/worker/conf/worker/deployment.yaml"
+    relative_path: "{$arg.wso2sp}/conf/worker/deployment.yaml"
+    file_type: "yaml"
+    configurations:
+      - operation: "replace"
+        xpath: "wso2.carbon/id"
+        value: "${NODE_ID}"
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"default\"]/host"
+        value: "${NODE_IP}"
+      - operation: "replace"
+        xpath: "wso2.transport.http/listenerConfigurations[id=\"msf4j-https\"]/host"
+        value: "${NODE_IP}"
+      - operation: "replace"
+        xpath: "databridge.config/dataReceivers/dataReceiver[type=\"Binary\"]/properties/hostName"
+        value: "${NODE_IP}"
+      - operation: "replace"
+        xpath: "wso2.metrics.jdbc/dataSource[dataSourceName=\"java:comp/env/jdbc/WSO2MetricsDB\"]/scheduledCleanup/enabled"
+        value: false
+      - operation: "replace"
+        xpath: "wso2.metrics.jdbc/dataSource[dataSourceName=\"java:comp/env/jdbc/WSO2MetricsDB\"]/scheduledCleanup/daysToKeep"
+        value: 7
+      - operation: "replace"
+        xpath: "wso2.metrics.jdbc/reporting/jdbc[name=\"JDBC\"]/enabled"
+        value: false
+      - operation: "replace"
+        xpath: "state.persistence/enabled"
+        value: true
+      - operation: "replace"
+        xpath: "state.persistence/persistenceStore"
+        value: "org.wso2.carbon.stream.processor.core.persistence.DBPersistenceStore"
+#      - operation: "add"
+#        xpath: "state.persistence/config/datasource"
+#        value: |
+#          datasource: SP_WORKER_STATE_DB
+#          table: PERSISTENCE_TABLE
+      - operation: "add"
+        xpath: "wso2.datasources/dataSources"
+        value:
+         |
+         name: SP_WORKER_STATE_DB
+         description: The datasource used for registry and user manager
+         definition:
+           type: RDBMS
+           configuration:
+             jdbcUrl: 'jdbc:mysql://sp-rdbms:3306/SP_WORKER_STATE_DB?useSSL=false'
+             username: root
+             password: 'root'
+             driverClassName: com.mysql.jdbc.Driver
+             maxPoolSize: 50
+             idleTimeout: 60000
+             connectionTestQuery: SELECT 1
+             validationTimeout: 30000
+             isAutoCommit: false
+      - operation: "add"
+        xpath: .
+        value:
+         |
+         deployment.config:
+           type: distributed
+           httpsInterface:
+             host: ${NODE_ID}
+             port: 9443
+             username: admin
+             password: admin
+           leaderRetryInterval: 10000
+           resourceManagers:
+             - host: wso2sp-manager-1
+               port: 9543
+               username: admin
+               password: admin
+             - host: wso2sp-manager-2
+               port: 9544
+               username: admin
+               password: admin
+
+  - file_path: dockerfiles/alpine/base/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/alpine/dashboard/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/alpine/editor/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/alpine/manager/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/alpine/README.md
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/alpine/worker/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/centos/base/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/centos/dashboard/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/centos/editor/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/centos/manager/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/centos/README.md
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/centos/worker/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/ubuntu/base/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/ubuntu/dashboard/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/ubuntu/editor/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/ubuntu/manager/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/ubuntu/README.md
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: dockerfiles/ubuntu/worker/Dockerfile
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"
+  - file_path: README.md
+    relative_path: ~
+    file_type: txt
+    configurations:
+      - operation: replace
+        current_value: "{$arg.existing_version}"
+        new_value: "{$arg.new_version}"

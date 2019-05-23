@@ -52,7 +52,7 @@ services:
       kafka:
         condition: service_healthy
   manager1:
-    image: docker.wso2.com/wso2sp-manager:4.3.0
+    image: wso2/wso2sp-manager:4.4.0
     container_name: wso2sp-manager-1
     ports:
       - "9543:9543"
@@ -63,7 +63,7 @@ services:
       retries: 5
     volumes:
       - "./manager/conf:/home/wso2carbon/wso2-config-volume/conf"
-      - "./manager/siddhi-files:/home/wso2carbon/wso2sp-4.3.0/wso2/manager/deployment/siddhi-files"
+      - "./manager/siddhi-files:/home/wso2carbon/wso2sp-4.4.0/wso2/manager/deployment/siddhi-files"
     depends_on:
       mysql:
         condition: service_healthy
@@ -71,7 +71,7 @@ services:
       NODE_ID: wso2sp-manager-1
       NODE_IP: 0.0.0.0
   manager2:
-    image: docker.wso2.com/wso2sp-manager:4.3.0
+    image: wso2/wso2sp-manager:4.4.0
     container_name: wso2sp-manager-2
     ports:
       - "9544:9543"
@@ -82,7 +82,7 @@ services:
       retries: 5
     volumes:
       - "./manager/conf:/home/wso2carbon/wso2-config-volume/conf"
-      - "./manager/siddhi-files:/home/wso2carbon/wso2sp-4.3.0/wso2/manager/deployment/siddhi-files"
+      - "./manager/siddhi-files:/home/wso2carbon/wso2sp-4.4.0/wso2/manager/deployment/siddhi-files"
     depends_on:
       manager1:
         condition: service_healthy
@@ -90,7 +90,7 @@ services:
           NODE_ID: wso2sp-manager-2
           NODE_IP: 0.0.0.0
   worker1:
-    image: docker.wso2.com/wso2sp-worker:4.3.0
+    image: wso2/wso2sp-worker:4.4.0
     container_name: wso2sp-worker-1
     ports:
       - "9001:9443"
@@ -108,7 +108,7 @@ services:
       NODE_ID: wso2sp-worker-1
       NODE_IP: 0.0.0.0
   worker2:
-    image: docker.wso2.com/wso2sp-worker:4.3.0
+    image: wso2/wso2sp-worker:4.4.0
     container_name: wso2sp-worker-2
     ports:
       - "9002:9443"

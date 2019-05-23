@@ -16,8 +16,8 @@
 #
 # ------------------------------------------------------------------------
 
-# set to latest Ubuntu LTS
-FROM wso2sp-base:4.3.0-alpine
+# set base docker image to alpine based wso2 stream processor base image
+FROM wso2sp-base:4.4.0-alpine
 MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
 # copy entrypoint bash script to user home

@@ -16,8 +16,8 @@
 #
 # ------------------------------------------------------------------------
 
-# set to latest Ubuntu LTS
-FROM wso2sp-base:4.3.0
+# set base docker image to ubuntu based wso2 stream processor base image
+FROM wso2sp-base:4.4.0
 MAINTAINER WSO2 Docker Maintainers "dev@wso2.org"
 
 # copy entrypoint bash script to user home

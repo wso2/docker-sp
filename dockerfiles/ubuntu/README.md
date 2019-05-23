@@ -1,7 +1,7 @@
 # Dockerfiles for WSO2 Stream Processor #
 
 This section defines the step-by-step instructions to build [Ubuntu](https://hub.docker.com/_/ubuntu/) Linux based Docker images for multiple profiles
-provided by WSO2 Stream Processor 4.3.0, namely:<br>
+provided by WSO2 Stream Processor 4.4.0, namely:<br>
 
 1. Dashboard
 2. Editor
@@ -24,14 +24,14 @@ git clone https://github.com/wso2/docker-sp.git
 
 ##### 2. Copy and extract the WSO2 Stream Processor distribution to `<DOCKERFILE_HOME>/base/files`.
 
-- Download [WSO2 Stream Processor 4.3.0 distribution](https://github.com/wso2/product-sp/releases) 
+- Download [WSO2 Stream Processor 4.4.0 distribution](https://github.com/wso2/product-sp/releases) 
 and extract it to `<DOCKERFILE_HOME>/base/files`. <br>
 - Download [MySQL Connector/J](https://downloads.mysql.com/archives/c-j) and copy that to `<DOCKERFILE_HOME>/base/files` folder.<br>
 - Once all of these are in place, it should look as follows:
 
   ```bash
   <DOCKERFILE_HOME>/base/files/mysql-connector-java-<version>-bin.jar
-  <DOCKERFILE_HOME>/base/files/wso2sp-4.3.0/
+  <DOCKERFILE_HOME>/base/files/wso2sp-4.4.0/
   ```
   
 >Please refer to [WSO2 Update Manager documentation](https://docs.wso2.com/display/WUM300/WSO2+Update+Manager)
@@ -49,43 +49,43 @@ The list of required client jars are;
 - zkclient-0.10.jar
 - zookeeper-3.4.9.jar
 
-> Use the `jartobundle.sh` script found it `wso2sp-4.3.0/bin` as shown below; note that you will have to run this command for each jar mentioned above
+> Use the `jartobundle.sh` script found it `wso2sp-4.4.0/bin` as shown below; note that you will have to run this command for each jar mentioned above
 
   ```
-  ./wso2sp-4.3.0/bin/jartobundle.sh path/to/kafka/client/jar <DOCKERFILE_HOME>/base/files
+  ./wso2sp-4.4.0/bin/jartobundle.sh path/to/kafka/client/jar <DOCKERFILE_HOME>/base/files
   ```
 
 ##### 4. Build the base Docker image.
 
 - For base, navigate to `<DOCKERFILE_HOME>/base` directory. <br>
   Execute `docker build` command as shown below.
-    + `docker build -t wso2sp-base:4.3.0 .`
+    + `docker build -t wso2sp-base:4.4.0 .`
         
 ##### 5. Build Docker images specific to each profile.
 
 - For Dashboard, navigate to `<DOCKERFILE_HOME>/dashboard` directory. <br>
   Execute `docker build` command as shown below. 
-    + `docker build -t wso2sp-dashboard:4.3.0 .`
+    + `docker build -t wso2sp-dashboard:4.4.0 .`
 - For Editor, navigate to `<DOCKERFILE_HOME>/editor` directory. <br>
   Execute `docker build` command as shown below. 
-    + `docker build -t wso2sp-editor:4.3.0 .`
+    + `docker build -t wso2sp-editor:4.4.0 .`
 - For Manager, navigate to `<DOCKERFILE_HOME>/manager` directory. <br>
   Execute `docker build` command as shown below. 
-    + `docker build -t wso2sp-manager:4.3.0 .`
+    + `docker build -t wso2sp-manager:4.4.0 .`
 - For Worker, navigate to `<DOCKERFILE_HOME>/worker` directory. <br>
   Execute `docker build` command as shown below. 
-    + `docker build -t wso2sp-worker:4.3.0 .`
+    + `docker build -t wso2sp-worker:4.4.0 .`
     
 ##### 6. Running Docker images specific to each profile.
 
 - For Dashboard,
-    + `docker run -it -p 9643:9643 wso2sp-dashboard:4.3.0`
+    + `docker run -it -p 9643:9643 wso2sp-dashboard:4.4.0`
 - For Editor,
-    + `docker run -it -p 9390:9390 -p 9743:9743 wso2sp-editor:4.3.0`
+    + `docker run -it -p 9390:9390 -p 9743:9743 wso2sp-editor:4.4.0`
 - For Manager,
-    + `docker run -it wso2sp-manager:4.3.0`
+    + `docker run -it wso2sp-manager:4.4.0`
 - For Worker,
-    + `docker run -it wso2sp-worker:4.3.0`   
+    + `docker run -it wso2sp-worker:4.4.0`   
 
 ##### 7. Accessing management console per each profile.
 
@@ -108,7 +108,7 @@ As an example, steps required to change the port offset using `deployment.yaml` 
 
 ##### 1. Stop the Identity Server Analytics container if it's already running.
 
-In WSO2 Stream Processor 4.3.0 product distribution, `deployment.yaml` configuration file <br>
+In WSO2 Stream Processor 4.4.0 product distribution, `deployment.yaml` configuration file <br>
 can be found at `<DISTRIBUTION_HOME>/conf/worker`. Copy the file to some suitable location of the host machine, <br>
 referred to as `<SOURCE_CONFIGS>/deployment.yaml` and change the offset value under ports to 2.
 
@@ -122,10 +122,10 @@ chmod o+r <SOURCE_CONFIGS>/deployment.yaml
 docker run 
 -p 7713:7713
 --volume <SOURCE_CONFIGS>/deployment.yaml:<TARGET_CONFIGS>/deployment.yaml
-wso2sp-worker:4.3.0
+wso2sp-worker:4.4.0
 ```
 
->In here, <TARGET_CONFIGS> refers to /home/wso2carbon/wso2sp-4.3.0/conf/worker folder of the container.
+>In here, <TARGET_CONFIGS> refers to /home/wso2carbon/wso2sp-4.4.0/conf/worker folder of the container.
 
 ## Docker command usage references
 
