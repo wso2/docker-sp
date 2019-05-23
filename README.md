@@ -14,4 +14,4 @@ Docker Compose files have been created according to the most common Stream Proce
 to quickly evaluate product features along side their co-operate requirements. The Compose files make use of per profile
 Docker images of WSO2 Stream Processor and MySQL.
 
-**Change log** from previous v4.4.0.1 release: [View Here](CHANGELOG.md)
+**Change log** from previous v4.3.0.2 release: [View Here](CHANGELOG.md)
