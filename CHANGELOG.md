@@ -3,7 +3,7 @@ All notable changes to this project 4.4.x per each release will be documented in
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [Unreleased]
+## [v4.4.0.1] - 2018-05-24
 
 ### Added
 - Per profile Docker resources of WSO2 Stream Processor v4.4.x for Alpine, CentOS and Ubuntu
